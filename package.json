@@ -1,0 +1,30 @@
+{
+  "name": "tuts",
+  "id": "tuts",
+  "version": "0.1.0",
+  "author": "Bart van der Schoor",
+  "description": "Test units for TypeScript",
+  "keywords": [
+    "typescript",
+    "unit test",
+    "test"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-typescript": "~0.1.4",
+    "grunt-contrib-clean": "~0.4.1",
+    "nodeunit": "~0.8.0"
+  },
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "build": "grunt build",
+    "test": "grunt test"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
