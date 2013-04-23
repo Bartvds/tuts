@@ -12,8 +12,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-typescript": "~0.1.4",
-    "grunt-contrib-clean": "~0.4.1",
-    "nodeunit": "~0.8.0"
+    "grunt-contrib-clean": "~0.4.1"
   },
   "engines": {
     "node": ">=0.10.x"

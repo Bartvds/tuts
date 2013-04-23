@@ -20,7 +20,7 @@ group.clear(() => {
 });*/
 
 runner.run((result:tuts.Result) => {
-	if (result.pass){
+	if (result.passed){
 
 	}
 });

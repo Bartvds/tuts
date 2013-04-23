@@ -1,6 +1,6 @@
 import tuts = module('../lib/tuts');
 
-export function test(group:tuts.TestGroup) => {
+export function test(group:tuts.Group) => {
 
 	group.add('boolean', (test:tuts.Test) => {
 		test.expect(1);

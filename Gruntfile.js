@@ -7,6 +7,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-typescript');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
+	grunt.loadTasks('tasks');
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
@@ -36,14 +38,14 @@ module.exports = function (grunt) {
 				dest: 'build/tests'
 			}
 		},
-		nodeunit: {
+		tuts: {
 			tests: ['build/tests/**/*.js']
 		}
 	});
 
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('build', ['clean:build', 'typescript:lib', 'test']);
-	grunt.registerTask('test', ['typescript:test', 'nodeunit']);
+	grunt.registerTask('test', ['typescript:test', 'tuts:tests']);
 
 
 	//link editor UI buttons

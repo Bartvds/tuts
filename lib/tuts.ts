@@ -17,6 +17,7 @@ export function eachHash(collection:Object, callback:(value:any, key:string, col
 export class Runner {
 
 	private _groups:Group[] = [];
+	private _results:GroupResult[] = [];
 
 	constructor() {
 
@@ -32,35 +33,45 @@ export class Runner {
 		var result = new Result();
 
 		eachArray(this._groups, (group:Group) => {
-			result.add(group);
+
+			eachArray(group.items, (item:Item) => {
+				var test = new Test(item);
+				this.items.push(test);
+				item.execute(test);
+
+				if (test.completed) {
+
+				}
+				else if (test.isAsync) {
+
+				}
+			});
 
 		});
-
-		result.run(callback);
 	}
 }
 
 export class Group {
 
-	private _items:Item[] = [];
+	public items:Item[] = [];
 
 	constructor(public label:string) {
 	}
 
-	add(label:String, execute:(test:Test) => void):Item {
-		var test = new Item(execute, label);
-		this._items.push(test);
-		return test;
+	add(label:string, execute:(test:Test) => void):Item {
+		var item = new Item(execute, label);
+		this.items.push(item);
+		return item;
 	}
 }
 
 export class Item {
+	/*constructor(public execute:(test:Test) => void, public label?:string) {*/
 	constructor(public execute:(test:Test) => void, public label?:string) {
 	}
 }
 
 export class Result {
-	private groups:GroupResult[] = [];
 
 	constructor() {
 	}
@@ -68,16 +79,6 @@ export class Result {
 	add(group:Group) {
 		var result = new GroupResult(group);
 		this.groups.push(result);
-
-		eachArray(group._items, (item:Item) => {
-
-			var test = new Test();
-			item.execute(test);
-
-		});
-	}
-
-	run(callback:(result:Result) => void) {
 
 	}
 }
@@ -88,18 +89,6 @@ export class GroupResult {
 
 	}
 
-	run() {
-		eachArray(this.group._items, (item:Item) => {
-
-			var test = new Test(item);
-			this.items.push(test);
-			item.execute(test);
-
-			if (test.executed === test.expected) {
-
-			}
-		});
-	}
 
 	finish(callback:(result:Result) => void) {
 
@@ -153,29 +142,33 @@ export class Test {
 		return true;
 	}
 
-	expect(amount:number) {
+	public expect(amount:number) {
 		this._expecting = amount;
 	}
 
-	isTrue(a:bool, description:string) {
-		this.mark(a !== true, description);
+	public isTrue(a:bool, label:string) {
+		this.mark(a !== true, label);
 	}
 
-	mark(passed:bool, description:string) {
+	private mark(passed:bool, label:string) {
 		if (passed) {
-			this._passed.push(new TestInfo(pass, label))
+			this._passed.push(new TestInfo(passed, label))
 		}
 		else {
-			this._failed.push(new TestInfo(pass, label))
+			this._failed.push(new TestInfo(passed, label))
 		}
 	}
 
-	getFailedLabels():string[] {
+	public getFailedLabels():string[] {
 		var arr:string[] = [];
 		eachArray(this._failed, (info:TestInfo) => {
 			arr.push(info.label);
 		});
 		return arr;
+	}
+
+	get isAsync():bool {
+		return this._open.length > 0;
 	}
 
 	get expecting():number {
@@ -195,7 +188,7 @@ export class Test {
 	}
 }
 export class TestInfo {
-	constructor(public pass:bool, public label:string) {
+	constructor(public passed:bool, public label:string) {
 
 	}
 }
