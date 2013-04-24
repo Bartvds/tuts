@@ -1,31 +1,36 @@
-///<reference path='Tuts/Runner.ts'/>
-///<reference path='Tuts/Util/Util.ts'/>
+///<reference path='tuts/Runner.ts'/>
+///<reference path='tuts/util/collection.ts'/>
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
+///<reference path='tuts/system/System.ts'/>
 
 'use strict';
 declare var __dirname;
 
-console.log('tuts.ts starting..');
+System.init();
+
+System.console.log('tuts.ts starting..');
 var load = ['basic.js'];
 
-var runner = new Tuts.Runner();
 
-Util.eachArray(load, (path:string) => {
+var runner = new tuts.Runner();
+
+util.eachArray(load, (path:string) => {
 
 	//path = path.replace(/\.[\w-]+$/,'');
 
-	console.log('loading module: ' + path);
+	System.console.log('loading module: ' + path);
 	var prefix = __dirname + '/tests/';
 
 	var mod = require(prefix + path);
 	var group = runner.getGroup(path);
+
 	if (!mod.init) {
-		console.log('missing init() on module: ' + path);
+		System.console.log('missing init() on module: ' + path);
 	} else if (mod.init(group)) {
-		console.log('added module: ' + path);
+		System.console.log('added module: ' + path);
 	}
 });
 
-//runner.run(new Tuts.BrowserReporter(document.getElementById('result')));
-console.log('tuts.ts no reporterrrrr!');
+//runner.run(new tuts.BrowserReporter(document.getElementById('result')));
+System.console.log('tuts.ts no reporterrrrr!');
 

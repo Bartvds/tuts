@@ -1,5 +1,4 @@
-module Util
-{
+module util {
 	export function eachArray(collection:any[], callback:(value:any, index:number, collection:any[]) => void, thisArg?:Object) {
 		for (var i = 0, ii = collection.length; i < ii; i++) {
 			if (callback.call(thisArg, collection[i], i, collection) === false) {

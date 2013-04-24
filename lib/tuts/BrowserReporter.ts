@@ -1,7 +1,7 @@
 ///<reference path='Runner.ts'/>
 ///<reference path='types.ts'/>
 
-module Tuts {
+module tuts {
 
 	export class BrowserReporter implements IReporter {
 		element:HTMLElement;

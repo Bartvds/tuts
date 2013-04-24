@@ -3,9 +3,11 @@
 
 
 class Async {
-	constructor(public test:TestResult, public label:String, public timeout?:number) {
+	constructor(public test:Test, public label:String, public timeout?:number) {
 	}
 
+
+	//TODO clear timeout
 	clear() {
 		this.test = null;
 	}

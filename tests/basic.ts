@@ -1,4 +1,4 @@
-///<reference path='../lib/Tuts/types.ts'/>
+///<reference path='../lib/tuts/types.ts'/>
 
 export function init(group:IGroup) => {
 

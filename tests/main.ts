@@ -1,6 +1,6 @@
-///<reference path='../lib/Tuts/Runner.ts'/>
-///<reference path='../lib/Tuts/BrowserReporter.ts'/>
-///<reference path='../lib/Tuts/types.ts'/>
+///<reference path='../lib/tuts/Runner.ts'/>
+///<reference path='../lib/tuts/BrowserReporter.ts'/>
+///<reference path='../lib/tuts/types.ts'/>
 
 export function init(group:IGroup) => {
 
