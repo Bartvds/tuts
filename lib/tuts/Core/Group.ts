@@ -13,6 +13,10 @@ class Group implements IGroup {
 		this._items.push(item);
 	}
 
+	getLabel():string {
+		return this.label;
+	}
+
 	getItems():Item[] {
 		return this._items;
 	}

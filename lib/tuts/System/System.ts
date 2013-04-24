@@ -1,5 +1,5 @@
 ///<reference path='../types.ts'/>
-///<reference path='../util/Logger.ts'/>
+///<reference path='../util/ConsoleLogger.ts'/>
 
 class System {
 
@@ -8,7 +8,7 @@ class System {
 	public static init() {
 		if (!System.console)
 		{
-			System.console = new Logger();
+			System.console = new ConsoleLogger();
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ///<reference path='../types.ts'/>
 
-class Logger implements ILogger {
+class ConsoleLogger implements ILogger {
 
 	private _enabled:bool;
 

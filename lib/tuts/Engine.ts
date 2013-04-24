@@ -3,15 +3,17 @@
 ///<reference path='core/Item.ts'/>
 ///<reference path='run/Test.ts'/>
 ///<reference path='system/System.ts'/>
+///<reference path='report/MultiReporter.ts'/>
 ///<reference path='util/collection.ts'/>
 ///<reference path='types.ts'/>
 
 module tuts {
-	export class Engine {
+	export class Engine implements IEngine {
 
 		private _groups:Group[] = [];
 		private _results:GroupResult[] = [];
 		private _running:Group[] = [];
+		private _reporter:MultiReporter = new MultiReporter();
 
 		constructor() {
 			System.console.log('Runner ' + Math.round(Math.random() * Math.pow(10, Math.random() * 8)), this);
@@ -23,11 +25,20 @@ module tuts {
 			return group;
 		}
 
-		run(reporter:IReporter) {
+		getGroups():IGroup[] {
+			return this._groups.slice(0);
+		}
 
-			System.console.log('run', this);
+		addReporter(reporter:IReporter) {
+			this._reporter.append(reporter);
+		}
 
-			var self:Engine = this;
+		run(reporter?:IReporter) {
+			if (reporter) {
+				this._reporter.append(reporter);
+			}
+
+			this._reporter.runStart(this);
 
 			util.eachArray(this._groups, (group:Group) => {
 

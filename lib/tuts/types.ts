@@ -1,6 +1,7 @@
 
 interface IGroup {
 	add(label:string, execute:(test:ITest) => void);
+	getLabel():string;
 }
 interface ITest {
 	expect(amount:number);
@@ -14,11 +15,21 @@ interface ILogger {
 	log(value:any, sender?:any);
 }
 interface IResult {
-	hasErrors():bool;
-	report(reporter:IReporter);
+}
+interface IEngine {
+	getGroup(label:string):IGroup;
+	getGroups():IGroup[];
 }
 interface IReporter {
 	getLabel():string;
+
+	log(value:string, sender?:any);
+	runStart(engine:IEngine);
+	groupStart(group:IGroup);
+	groupComplete(group:IGroup);
+	testStart(test:ITest);
+	testComplete(test:ITest);
+	runComplete(result:IResult);
 }
 interface IResponder{
 	testUpdate();

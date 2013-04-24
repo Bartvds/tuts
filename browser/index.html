@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>0 tuts</title>
+    <title>- - - tuts</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="author" content="Bart van der Schoor">
     <link rel="stylesheet" href="style/test.css" type="text/css" />
 </head>
 <body>
-<div id="result">
+<div id="header">
     <h1>Running tests..</h1>
-    <p>If nothing happens see the console for more info.</p>
 </div>
-<script src="components/requirejs/require.js" data-main="js/tuts.js"></script>
+<div id="result">
+    <p>If nothing happens see the console for more info.</p></div>
+<div id="log">
+</div>
+<script>
+    var js = document.createElement('script');
+    js.src = 'components/requirejs/require.js'
+    js.dataset.main = 'js/tuts.js';
+    document.getElementsByTagName('head')[0].appendChild(js);
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 ///<reference path='tuts/Engine.ts'/>
 ///<reference path='tuts/util/collection.ts'/>
 ///<reference path='tuts/system/System.ts'/>
+///<reference path='tuts/report/LogReporter.ts'/>
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
 
 'use strict';
@@ -30,7 +31,5 @@ util.eachArray(load, (path:string) => {
 		System.console.log('added module: ' + path);
 	}
 });
-
-//engine.run(new tuts.BrowserReporter(document.getElementById('result')));
-System.console.log('tuts.ts no reporterrrrr!');
+engine.run(new tuts.LogReporter(System.console, false));
 
