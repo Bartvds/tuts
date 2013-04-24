@@ -54,15 +54,6 @@ module.exports = function (grunt) {
 				},
 				src: ['tests/**/*.ts'],
 				dest: 'browser/tests/'
-			},
-			support: {
-				options: {
-					module: 'commonjs', //or commonjs
-					target: 'es5', //or es3
-					base_path: 'lib/support'
-				},
-				src: ['lib/support/filelist.ts'],
-				dest: 'lib/support/filelist.js'
 			}
 		},
 		deserve: {
@@ -91,6 +82,20 @@ module.exports = function (grunt) {
 					base: 'tests/',
 					save: 'tests/list.json'
 				}
+			},
+			browser_tests: {
+				src: ['browser/tests/**/*.js'],
+				options: {
+					base: 'browser/tests',
+					save: 'browser/tests/list.json'
+				}
+			},
+			node_tests: {
+				src: ['build/tests/**/*.js'],
+				options: {
+					base: 'build/tests',
+					save: 'build/tests/list.json'
+				}
 			}
 		}
 	});
@@ -99,17 +104,17 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['clean', 'typescript:lib']);
 	grunt.registerTask('test', ['typescript:test']);
 
-	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests']);
-	grunt.registerTask('node', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests', 'tuts:node']);
+	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('node', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
 
 	grunt.registerTask('server', ['browser', 'deserve:browser']);
 
-	grunt.registerTask('support', ['typescript:support']);
+	grunt.registerTask('support', []);
 
 
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
 	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
-	//grunt.registerTask('edit_02', ['node']);
-	grunt.registerTask('edit_03', ['browser', 'deserve_reload']);
+	grunt.registerTask('edit_04', ['node']);
+	grunt.registerTask('edit_05', ['browser', 'deserve_reload']);
 };

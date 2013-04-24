@@ -3,3 +3,8 @@ body {
     background-color:#ddd;
     color:#444;
 }
+
+.logLine {
+    font-family:monospace;
+    font-size:.8em;
+}

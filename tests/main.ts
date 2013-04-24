@@ -3,8 +3,6 @@
 
 export function init(group:IGroup) => {
 
-	console.log('Yooooooo! ' + Math.round(Math.random() * Math.pow(10, Math.random() * 8)));
-
 	/*
 	 group.setup(() => {
 

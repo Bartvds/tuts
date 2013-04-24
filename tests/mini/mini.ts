@@ -1,7 +1,7 @@
 
-///<reference path='../lib/tuts/types.ts'/>
-///<reference path='../lib/miniapp/MiniApp.ts'/>
-///<reference path='../lib/miniapp/Stepper.ts'/>
+///<reference path='../../lib/tuts/types.ts'/>
+///<reference path='../../lib/miniapp/MiniApp.ts'/>
+///<reference path='../../lib/miniapp/Stepper.ts'/>
 
 
 export function init(group:IGroup) => {

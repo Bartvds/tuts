@@ -4,7 +4,7 @@
 ///<reference path='run/Test.ts'/>
 ///<reference path='system/System.ts'/>
 ///<reference path='report/MultiReporter.ts'/>
-///<reference path='util/collection.ts'/>
+///<reference path='../util/collection.ts'/>
 ///<reference path='types.ts'/>
 
 module tuts {
@@ -16,7 +16,18 @@ module tuts {
 		private _reporter:MultiReporter = new MultiReporter();
 
 		constructor() {
-			System.console.log('Runner ' + Math.round(Math.random() * Math.pow(10, Math.random() * 8)), this);
+
+		}
+		addModuleGroup(name:string, mod:any) {
+			if (!mod) {
+				this._reporter.log('not a module: ' + name);
+			} else if (!mod.init) {
+				this._reporter.log('missing init() on module: ' + name);
+			} else {
+				var group = this.getGroup(name);
+				mod.init(group);
+				this._reporter.log('added module: ' + name);
+			}
 		}
 
 		getGroup(label:string):IGroup {
@@ -57,6 +68,9 @@ module tuts {
 				}, this);
 
 			}, this);
+		}
+		get reporter():IReporter {
+			return this._reporter
 		}
 	}
 }

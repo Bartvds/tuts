@@ -28,8 +28,9 @@ class HTMLLogger implements ILogger {
 		if (sender) {
 			arr.push(sender);
 		}
-		var node = document.createElement('p');
-		node.appendChild(document.createTextNode('[' + arr.join(', ') + ']'));
+		var node = document.createElement('div');
+		node.classList.add('logLine');
+		node.appendChild(document.createTextNode(arr.join(', ')));
 		this.element.appendChild(node);
 	}
 }
