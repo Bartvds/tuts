@@ -8,7 +8,9 @@ interface ITest {
 	//async returns a closure
 	async(label:string, seconds?:number):(error?:any) => void;
 	//asserts
-	isTrue(a:bool, label:string);
+	isTrue(a:bool, label:string):bool;
+	isEqual(a:any, b:any, label:string):bool;
+	isStrictEqual(a:any, b:any, label:string):bool;
 }
 interface ILogger {
 	enabled(value?:bool):bool;

@@ -1,5 +1,5 @@
 ///<reference path='tuts/Engine.ts'/>
-///<reference path='tuts/util/collection.ts'/>
+///<reference path='util/collection.ts'/>
 ///<reference path='tuts/system/System.ts'/>
 ///<reference path='tuts/report/LogReporter.ts'/>
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>

@@ -1,8 +1,6 @@
 
 'use strict';
 
-
-
 module.exports = function(grunt) {
 
 	var util = require('util');

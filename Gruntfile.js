@@ -21,8 +21,7 @@ module.exports = function (grunt) {
 				options: {
 					module: 'commonjs', //or commonjs
 					target: 'es5', //or es3
-					base_path: 'lib/',
-					sourcemap: false
+					base_path: 'lib/'
 				},
 				src: ['lib/node.ts'],
 				dest: 'build/tuts.js'
@@ -32,8 +31,7 @@ module.exports = function (grunt) {
 					expand: true,
 					module: 'commonjs', //or commonjs
 					target: 'es5', //or es3
-					base_path: 'tests/',
-					sourcemap: true
+					base_path: 'tests/'
 				},
 				src: ['tests/**/*.ts'],
 				dest: 'build/tests/'
@@ -42,8 +40,7 @@ module.exports = function (grunt) {
 				options: {
 					module: 'amd', //or commonjs
 					target: 'es5', //or es3
-					base_path: 'lib/',
-					sourcemap: false
+					base_path: 'lib/'
 				},
 				src: ['lib/browser.ts'],
 				dest: 'browser/js/tuts.js'
@@ -53,11 +50,19 @@ module.exports = function (grunt) {
 					expand: true,
 					module: 'amd', //or commonjs
 					target: 'es5', //or es3
-					base_path: 'tests/',
-					sourcemap: false
+					base_path: 'tests/'
 				},
 				src: ['tests/**/*.ts'],
 				dest: 'browser/tests/'
+			},
+			support: {
+				options: {
+					module: 'commonjs', //or commonjs
+					target: 'es5', //or es3
+					base_path: 'lib/support'
+				},
+				src: ['lib/support/filelist.ts'],
+				dest: 'lib/support/filelist.js'
 			}
 		},
 		deserve: {
@@ -78,6 +83,15 @@ module.exports = function (grunt) {
 					path: 'build/tuts.js'
 				}
 			}
+		},
+		filelist : {
+			tests: {
+				src: ['tests/**/*.ts'],
+				options: {
+					base: 'tests/',
+					save: 'tests/list.json'
+				}
+			}
 		}
 	});
 
@@ -90,9 +104,12 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('server', ['browser', 'deserve:browser']);
 
+	grunt.registerTask('support', ['typescript:support']);
+
 
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
-	grunt.registerTask('edit_02', ['node']);
+	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
+	//grunt.registerTask('edit_02', ['node']);
 	grunt.registerTask('edit_03', ['browser', 'deserve_reload']);
 };

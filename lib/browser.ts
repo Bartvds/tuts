@@ -1,6 +1,6 @@
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
 ///<reference path='tuts/Engine.ts'/>
-///<reference path='tuts/util/collection.ts'/>
+///<reference path='util/collection.ts'/>
 ///<reference path='tuts/system/HTMLLogger.ts'/>
 ///<reference path='tuts/report/BrowserReporter.ts'/>
 ///<reference path='tuts/report/LogReporter.ts'/>

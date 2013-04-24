@@ -40,8 +40,15 @@ class Test implements ITest {
 		this._callback(this);
 	}
 
-	public isTrue(a:bool, label:string) {
-		this.mark(a !== true, label);
+	public isEqual(a:any, b:any, label:string):bool {
+		return this.mark(a == b, label);
+	}
+
+	public isStrictEqual(a:any, b:any, label:string):bool {
+		return this.mark(a === b, label);
+	}
+	public isTrue(a:bool, label:string):bool {
+		return this.mark(a === true, label);
 	}
 
 	//more
@@ -75,6 +82,7 @@ class Test implements ITest {
 		else {
 			this._failed.push(label)
 		}
+		return passed;
 	}
 
 	getFailedLabels():string[] {
