@@ -18,9 +18,6 @@ module.exports = function (grunt) {
 		var res = {};
 
 		var list = this.filesSrc;
-		grunt.log.writeln(this.filesSrc);
-		grunt.log.writeln(list);
-		grunt.log.writeln(options.base);
 
 		if (options.base) {
 			var base = path.resolve(options.base.replace(/[\/\\]*$/, '/'));

@@ -13,7 +13,7 @@ System.init();
 var fs = require('fs');
 
 var engine = new tuts.Engine();
-engine.addReporter(new tuts.LogReporter(System.console, false));
+engine.addReporter(new tuts.LogReporter(System.console, false, ''));
 
 var list;
 
@@ -33,7 +33,6 @@ else {
 
 		engine.reporter.log('loading: ' + path);
 		var prefix = __dirname + '/tests/';
-
 		var mod = require(prefix + path);
 		engine.addModuleGroup(path, mod);
 	});
