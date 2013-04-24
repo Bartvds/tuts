@@ -1,5 +1,5 @@
 ///<reference path='../types.ts'/>
-///<reference path='../util/ConsoleLogger.ts'/>
+///<reference path='ConsoleLogger.ts'/>
 
 class System {
 
