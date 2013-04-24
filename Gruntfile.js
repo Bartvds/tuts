@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			build: ['build/**/*.*', 'build'],
-			browser: ['browser/tests/**/*.*']
+			browser: ['browser/tests/**/*.*', 'browser/tests', 'browser/js/tuts.js']
 		},
 		typescript: {
 			node_tuts: {
