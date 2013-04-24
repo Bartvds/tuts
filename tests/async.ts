@@ -1,9 +1,11 @@
-import tuts = module('../lib/tuts');
 
-export function test(group:tuts.Group) => {
-	group.add('async done', (test:tuts.Test) => {
+///<reference path='../lib/Tuts/types.ts'/>
+
+
+export function init(group:IGroup) => {
+	group.add('async done', (test:ITest) => {
 		test.expect(1);
-		var done = test.async();
+		var done = test.async('timed true');
 		setTimeout(() => {
 			test.isTrue(true, 'should be true')
 			done();

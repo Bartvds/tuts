@@ -1,8 +1,8 @@
-import tuts = module('../lib/tuts');
+///<reference path='../lib/Tuts/types.ts'/>
 
-export function test(group:tuts.Group) => {
+export function init(group:IGroup) => {
 
-	group.add('boolean', (test:tuts.Test) => {
+	group.add('boolean', (test:ITest) => {
 		test.expect(1);
 		test.isTrue(true, 'should be true');
 	});

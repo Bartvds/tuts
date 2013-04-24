@@ -1,26 +1,27 @@
+///<reference path='../lib/Tuts/Runner.ts'/>
+///<reference path='../lib/Tuts/BrowserReporter.ts'/>
+///<reference path='../lib/Tuts/types.ts'/>
 
-import tuts = module('../lib/tuts');
-import basic = module('basic');
+export function init(group:IGroup) => {
 
-var runner = new tuts.Runner();
+	console.log('Yooooooo! ' + Math.round(Math.random() * Math.pow(10, Math.random() * 8)));
 
-var group = runner.getGroup('math');
-/*
-group.setup(() => {
+	//var runner = new Tuts.Runner();
 
-});*/
-group.add('inline', (test: tuts.Test) => {
-	test.expect(2);
-	test.isTrue(true, 'should be true');
-	test.isTrue(!false, 'should be true too');
-});
-/*
-group.clear(() => {
+	//var group = runner.getGroup('math');
+	/*
+	 group.setup(() => {
 
-});*/
+	 });*/
+	group.add('inline', (test:ITest) => {
+		test.expect(2);
+		test.isTrue(true, 'should be true');
+		test.isTrue(!false, 'should be true too');
+	});
+	/*
+	 group.clear(() => {
 
-runner.run((result:tuts.Result) => {
-	if (result.passed){
+	 });*/
 
-	}
-});
+	//runner.run(new Tuts.BrowserReporter(document.getElementById('result')));
+}
