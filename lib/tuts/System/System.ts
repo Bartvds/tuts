@@ -6,9 +6,8 @@ class System {
 	public static console:ILogger;
 
 	public static init() {
-		if (!System.console)
-		{
-			System.console = new ConsoleLogger();
+		if (!System.console){
+			System.console = ConsoleLogger.getLogger();
 		}
 	}
 }

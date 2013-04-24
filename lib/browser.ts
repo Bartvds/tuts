@@ -35,7 +35,7 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 
 	var engine = new tuts.Engine();
 	engine.addReporter(new tuts.LogReporter(System.console));
-	engine.addReporter(new tuts.LogReporter(new HTMLLogger(document.getElementById('log'))));
+	engine.addReporter(new tuts.LogReporter(new HTMLLogger(document.getElementById('log')), false, ''));
 	engine.addReporter(new tuts.BrowserReporter(document.getElementById('result')));
 
 	var arr = [];

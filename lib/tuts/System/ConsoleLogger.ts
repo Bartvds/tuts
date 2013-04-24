@@ -1,11 +1,23 @@
 ///<reference path='../types.ts'/>
+///<reference path='Environment.ts'/>
 
 class ConsoleLogger implements ILogger {
 
 	private _enabled:bool;
+	private asObject:bool;
 
-	constructor(enabled?:bool) {
+	constructor(asObject?:bool, enabled?:bool) {
 		this._enabled = !!enabled;
+		this.asObject = !!asObject;
+	}
+
+	static getLogger():ILogger {
+		if (Environment.isBrowser()){
+			return new ConsoleLogger(true);
+		}
+		else {
+			return new ConsoleLogger(false);
+		}
 	}
 
 	public enabled(value?:bool):bool {
@@ -19,10 +31,21 @@ class ConsoleLogger implements ILogger {
 		if (!this.enabled) {
 			return;
 		}
-		var arr = [value]
-		if (sender) {
-			arr.push(sender);
+		if (this.asObject) {
+			var arr = [value]
+			if (sender) {
+				arr.push(sender);
+			}
+			console.log(arr);
 		}
-		console.log(arr);
+		else {
+			if (sender) {
+				console.log(value + ' - ' + sender);
+			}
+			else {
+				console.log(value + '');
+			}
+		}
+
 	}
 }

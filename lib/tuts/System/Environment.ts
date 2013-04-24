@@ -1,11 +1,9 @@
-module System { 
-    export class Environment {
-        public static isNode():bool {
-            return !(typeof ActiveXObject === "function");
-        }
+class Environment {
+	public static isNode():bool {
+		return !(typeof ActiveXObject === "function");
+	}
 
-        public static isBrowser():bool {
-            return !Environment.isNode();
-        }
-    }
+	public static isBrowser():bool {
+		return !Environment.isNode();
+	}
 }

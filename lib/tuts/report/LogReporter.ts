@@ -8,7 +8,7 @@ module tuts {
 
 		constructor(public logger:ILogger, sender?:bool, prefix?:string) {
 			this.sender = !!sender;
-			this.prefix = prefix ? prefix : '-> ';
+			this.prefix = arguments.length >= 3 ? prefix : '-> ';
 		}
 
 		getLabel():string {
