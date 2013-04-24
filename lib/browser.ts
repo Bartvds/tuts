@@ -1,4 +1,4 @@
-///<reference path='tuts/Runner.ts'/>
+///<reference path='tuts/Engine.ts'/>
 ///<reference path='tuts/util/collection.ts'/>
 ///<reference path='tuts/BrowserReporter.ts'/>
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
@@ -15,14 +15,14 @@ require([], () => {
 	System.console.log('tuts.ts starting..');
 	var load = ['basic.js'];
 
-
-	var runner = new tuts.Runner();
+	document.title = Math.round(Math.random() * Math.pow(10, 4)) + ' tuts';
+	var engine = new tuts.Engine();
 
 	util.eachArray(load, (path:string) => {
 		System.console.log('loading module: ' + path);
 
 		require(['tests/' + path], (mod) => {
-			var group = runner.getGroup(path);
+			var group = runnengineer.getGroup(path);
 			if (!mod.init) {
 				System.console.log('missing init() on module: ' + path);
 			} else if (mod.init(group)) {
@@ -31,6 +31,6 @@ require([], () => {
 		});
 	});
 
-	runner.run(new tuts.BrowserReporter(document.getElementById('result')));
+	engine.run(new tuts.BrowserReporter(document.getElementById('result')));
 	System.console.log('tuts.ts ok!');
 });

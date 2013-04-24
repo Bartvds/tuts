@@ -1,7 +1,7 @@
-///<reference path='tuts/Runner.ts'/>
+///<reference path='tuts/Engine.ts'/>
 ///<reference path='tuts/util/collection.ts'/>
-///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
 ///<reference path='tuts/system/System.ts'/>
+///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
 
 'use strict';
 declare var __dirname;
@@ -12,7 +12,7 @@ System.console.log('tuts.ts starting..');
 var load = ['basic.js'];
 
 
-var runner = new tuts.Runner();
+var engine = new tuts.Engine();
 
 util.eachArray(load, (path:string) => {
 
@@ -22,7 +22,7 @@ util.eachArray(load, (path:string) => {
 	var prefix = __dirname + '/tests/';
 
 	var mod = require(prefix + path);
-	var group = runner.getGroup(path);
+	var group = engine.getGroup(path);
 
 	if (!mod.init) {
 		System.console.log('missing init() on module: ' + path);
@@ -31,6 +31,6 @@ util.eachArray(load, (path:string) => {
 	}
 });
 
-//runner.run(new tuts.BrowserReporter(document.getElementById('result')));
+//engine.run(new tuts.BrowserReporter(document.getElementById('result')));
 System.console.log('tuts.ts no reporterrrrr!');
 

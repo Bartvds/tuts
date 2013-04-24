@@ -1,5 +1,5 @@
 ///<reference path='Async.ts'/>
-///<reference path='Item.ts'/>
+///<reference path='../core/Item.ts'/>
 ///<reference path='../types.ts'/>
 
 class Test implements ITest {

@@ -1,4 +1,4 @@
-///<reference path='GroupResult.ts'/>
+
 ///<reference path='../types.ts'/>
 
 class Result implements IResult {

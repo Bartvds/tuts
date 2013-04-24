@@ -1,5 +1,4 @@
-///<reference path='Test.ts'/>
-///<reference path='Item.ts'/>
+
 ///<reference path='../types.ts'/>
 
 class Group implements IGroup {
@@ -9,7 +8,7 @@ class Group implements IGroup {
 	constructor(public label:string) {
 	}
 
-	add(label:string, execute:(test:Test) => void) {
+	add(label:string, execute:(test:ITest) => void) {
 		var item = new Item(this, execute, label);
 		this._items.push(item);
 	}

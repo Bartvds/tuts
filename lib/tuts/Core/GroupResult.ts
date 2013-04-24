@@ -1,5 +1,4 @@
 
-///<reference path='Test.ts'/>
 ///<reference path='Group.ts'/>
 ///<reference path='Result.ts'/>
 

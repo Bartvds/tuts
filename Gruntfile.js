@@ -92,7 +92,7 @@ module.exports = function (grunt) {
 
 
 	//link editor UI buttons
-	grunt.registerTask('edit_01', ['build', 'test']);
+	grunt.registerTask('edit_01', ['clean']);
 	grunt.registerTask('edit_02', ['node']);
 	grunt.registerTask('edit_03', ['browser', 'deserve_reload']);
 };

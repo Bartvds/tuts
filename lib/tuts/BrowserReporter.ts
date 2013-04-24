@@ -1,4 +1,4 @@
-///<reference path='Runner.ts'/>
+
 ///<reference path='types.ts'/>
 
 module tuts {
