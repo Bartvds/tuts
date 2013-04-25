@@ -3,6 +3,7 @@ declare var document;
 declare var window;
 
 class Environment {
+	//TODO sane checks please
 	public static isNode():bool {
 		return !Environment.isBrowser() && typeof process === "object";
 	}
