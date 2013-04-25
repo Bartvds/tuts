@@ -45,11 +45,7 @@ module tuts {
 				queue.append(group);
 			}, this);
 			//beh
-			queue.run((result:IResult) => {
-				if (callback) {
-					callback(result ? result.getError() : new Error('no result'), result);
-				}
-			});
+			queue.run(callback);
 		}
 
 		get reporter():IReporter {

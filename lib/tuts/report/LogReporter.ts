@@ -32,7 +32,7 @@ module tuts {
 		}
 
 		testStart(test:IItemResult) {
-			this.logger.log(this.prefix + 'started test: "' + test.getLabel() + '"', this.sender ? test : null);
+			//this.logger.log(this.prefix + 'started test: "' + test.getLabel() + '"', this.sender ? test : null);
 		}
 
 		testComplete(test:IItemResult) {

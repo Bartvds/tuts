@@ -1,4 +1,3 @@
-
 interface IGroup {
 	add(label:string, execute:(test:ITest) => void);
 	getLabel():string;
@@ -28,6 +27,7 @@ interface IReporter {
 	runComplete(result:IResult);
 }
 interface IResult {
+	hasPassed():bool;
 	getStat():IStat;
 	getError():any;
 	getGroups():IGroupResult[];
@@ -39,22 +39,24 @@ interface IGroupResult {
 }
 interface IItemResult {
 	getLabel():string;
-	isAsync():bool;
-	isStarted():bool;
-	isFinished():bool;
+	/*isAsync():bool;
+	 isStarted():bool;
+	 isFinished():bool;*/
 	getStat():IStat;
 }
-interface IStat {
+
+interface IStat extends IStatNum {
 	getLabel():string;
 	getShort():string;
-
+	hasExpected():bool;
+	hasPassed():bool;
+}
+interface IStatNum {
 	numTested():number;
 	numExpected():number;
 	numPassed():number;
 	numFailed():number;
 	numMissing():number;
-	hasExpected():bool;
-	hasPassed():bool;
 }
 
 interface ILogger {

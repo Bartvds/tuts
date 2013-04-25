@@ -18,6 +18,9 @@ class Result implements IResult {
 		return this._groups.slice(0);
 	}
 
+	public hasPassed():bool {
+		return this.getStat().hasPassed();
+	}
 	public getStat():IStat {
 		var stat:Stat = new Stat();
 		util.eachArray(this._groups, (res:IGroupResult) => {

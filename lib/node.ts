@@ -23,6 +23,7 @@ try {
 catch (e) {
 	System.console.log(e);
 }
+
 if (!list || !list.list) {
 	System.console.log('no list data in list.json');
 }
@@ -42,7 +43,10 @@ else {
 		}
 		engine.addModuleGroup(path, mod);
 	});
-	engine.run();
+
+	engine.run((error:any, result?:IResult) => {
+		System.console.log(!error && result ? (result.hasPassed() ? 'PASSED' : 'FAILED' ) : 'no result')
+	});
 }
 
 

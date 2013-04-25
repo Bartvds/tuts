@@ -7,17 +7,20 @@ class Stat implements IStat {
 	_numExpected:number = 0;
 	_numPassed:number = 0;
 	_numFailed:number = 0;
+	_numMissing:number = 0;
 	_label:string = '';
 
 	constructor(label?:string) {
 		this._label = label || '';
 	}
 
-	public add(stat:IStat) {
+	public add(stat:IStatNum):Stat {
 		this._numTested += stat.numTested();
 		this._numExpected += stat.numExpected();
 		this._numPassed += stat.numPassed();
 		this._numFailed += stat.numFailed();
+		this._numMissing += stat.numMissing();
+		return this;
 	}
 
 	public getLabel():string {
@@ -45,7 +48,7 @@ class Stat implements IStat {
 	}
 
 	public numMissing():number {
-		return this._numExpected > 0 ? this._numExpected - this._numTested : 0;
+		return this._numMissing;
 	}
 
 	public hasExpected():bool {

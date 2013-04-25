@@ -48,8 +48,8 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 		util.eachArray(mods, (mod:any, i:number) => {
 			engine.addModuleGroup(list.list[i], mod);
 		});
-		engine.run((error:any, result?:any) => {
-
+		engine.run((error:any, result?:IResult) => {
+			engine.reporter.log(!error && result ? (result.hasPassed() ? 'PASSED' : 'FAILED' ) : 'no result')
 		});
 	});
 });

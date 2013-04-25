@@ -3,7 +3,7 @@
 ///<reference path='TestApi.ts'/>
 ///<reference path='../types.ts'/>
 
-class ItemTest implements IItemResult {
+class ItemTest implements IItemResult, IStatNum {
 
 	_item:Item;
 	_open:Async[] = [];
@@ -83,7 +83,7 @@ class ItemTest implements IItemResult {
 	}
 
 	getStat():IStat {
-		return this;
+		return new Stat(this.getLabel()).add(this);
 	}
 
 	public get item():Item {
@@ -92,10 +92,6 @@ class ItemTest implements IItemResult {
 
 	public getLabel():string {
 		return this._item.label;
-	}
-
-	public getShort():string {
-		return '"' + this.getLabel() + '" ' + this.hasPassed() + ' [' + [this.numMissing(), this.numFailed()].join(' ') + '] [' + [this.numPassed(), this.numTested(), this.numExpected()].join(' ') + ']';
 	}
 
 	public isAsync():bool {
@@ -109,6 +105,7 @@ class ItemTest implements IItemResult {
 	public isFinished():bool {
 		return this._finished;
 	}
+
 
 	public numTested():number {
 		return this._passed.length + this._failed.length;
@@ -127,14 +124,7 @@ class ItemTest implements IItemResult {
 	}
 
 	public numMissing():number {
-		return this._expecting > 0 ? this._expecting - this.numTested() : 0;
-	}
-
-	public hasExpected():bool {
-		return (this._expecting > 0 && this.numTested() === this._expecting);
-	}
-
-	public hasPassed():bool {
-		return this._finished && this.numFailed() === 0 && this.hasExpected();
+		var m = this._expecting - this.numTested();
+		return m > 0 ? m : 0;
 	}
 }

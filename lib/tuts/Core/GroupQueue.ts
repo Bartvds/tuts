@@ -25,7 +25,7 @@ class GroupQueue {
 		this._queuedGroups.push(new GroupTest(group));
 	}
 
-	public run(callback:(GroupQueue) => void) {
+	public run(callback:(err:any, result?:IResult) => void) {
 		if (this._running) {
 			return;
 		}
