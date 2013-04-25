@@ -85,6 +85,9 @@ class GroupTest implements IGroupResult {
 	public getLabel():string {
 		return this._group.getLabel();
 	}
+	public getUID():string {
+		return this._group.uid;
+	}
 
 	public getStat():IStat {
 		var stat:Stat = new Stat(this.getLabel())

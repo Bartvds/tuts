@@ -1,4 +1,5 @@
 ///<reference path='../types.ts'/>
+///<reference path='../../util/collection.ts'/>
 
 module tuts {
 
@@ -24,7 +25,7 @@ module tuts {
 			return 'BrowserReporter';
 		}
 
-		runStart() {
+		runStart(result:IResult) {
 
 		}
 

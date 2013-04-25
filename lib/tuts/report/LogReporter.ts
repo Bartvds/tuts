@@ -15,11 +15,7 @@ module tuts {
 			return 'LogReporter';
 		}
 
-		log(value:string, sender?:any) {
-			this.logger.log(this.prefix + value, this.sender ? sender : null);
-		}
-
-		runStart() {
+		runStart(result:IResult) {
 			this.logger.log(this.prefix + 'testing started');
 		}
 
@@ -43,6 +39,10 @@ module tuts {
 			var stat = result.getStat();
 			this.logger.log(this.prefix + 'testing completed: ' + stat.getShort(), this.sender ? result : null);
 			this.logger.log(stat.getBlock());
+		}
+
+		log(value:string, sender?:any) {
+			this.logger.log(this.prefix + value, this.sender ? sender : null);
 		}
 
 		toString():string {

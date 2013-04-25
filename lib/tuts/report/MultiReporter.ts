@@ -20,9 +20,9 @@ module tuts {
 			}
 		}
 
-		runStart() {
+		runStart(result:IResult) {
 			for (var i = 0, ii = this._reporters.length; i < ii; i++) {
-				this._reporters[i].runStart();
+				this._reporters[i].runStart(result);
 			}
 		}
 

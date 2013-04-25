@@ -38,6 +38,7 @@ class Stat implements IStat {
 		}
 		fields.push([<any>'hasPassed',this.hasPassed()]);
 		fields.push([<any>'numTested',this.numTested()]);
+		fields.push([<any>'numExpected',this.numExpected()]);
 		fields.push([<any>'numFailed',this.numFailed()]);
 		fields.push([<any>'numMissing',this.numMissing()]);
 		fields.push([<any>'numPassed',this.numPassed()]);

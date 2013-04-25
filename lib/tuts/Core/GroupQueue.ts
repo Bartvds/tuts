@@ -1,9 +1,8 @@
 ///<reference path='Group.ts'/>
-///<reference path='Result.ts'/>
 ///<reference path='GroupTest.ts'/>
 ///<reference path='../types.ts'/>
 
-class GroupQueue {
+class GroupQueue implements IResult {
 
 	private _queuedGroups:GroupTest[] = [];
 	private _activeGroups:GroupTest[] = [];
@@ -16,6 +15,8 @@ class GroupQueue {
 	private _completed:bool;
 	private _inStep:bool;
 	private _callback:(err:any, result?:IResult) => void;
+
+	private _uid:string = System.getUID();
 
 	constructor(reporter:IReporter) {
 		this._reporter = reporter;
@@ -31,7 +32,8 @@ class GroupQueue {
 		}
 		this._running = true;
 		this._callback = callback;
-		this._reporter.runStart();
+		this._reporter.runStart(this);
+
 		this.step();
 	}
 
@@ -83,13 +85,34 @@ class GroupQueue {
 		}
 		this._completed = true;
 
-			var result:IResult = new Result(this._completedGroups.slice(0));
-
-		this._reporter.runComplete(result);
+		this._reporter.runComplete(this);
 
 		if (this._callback) {
-			this._callback(null, result);
+			this._callback(null, this);
 			this._callback = null;
 		}
+	}
+
+	public getUID():string {
+		return this._uid;
+	}
+
+	public getGroups():IGroupResult[] {
+		return this._completedGroups.slice(0);
+	}
+	public getError():any {
+		return null;
+	}
+
+	public hasPassed():bool {
+		return this.getStat().hasPassed();
+	}
+
+	public getStat():IStat {
+		var stat:Stat = new Stat();
+		util.eachArray(this.getGroups(), (res:IGroupResult) => {
+			stat.add(res.getStat());
+		});
+		return stat;
 	}
 }

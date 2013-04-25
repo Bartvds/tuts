@@ -1,7 +1,10 @@
 
 ///<reference path='../types.ts'/>
+///<reference path='../system/System.ts'/>
 
 class Group implements IGroup {
+
+	public uid:string = System.getUID();
 
 	public _items:Item[] = [];
 

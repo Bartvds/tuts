@@ -19,7 +19,7 @@ interface IReporter {
 
 	log(value:string, sender?:any);
 
-	runStart();
+	runStart(result:IResult);
 	groupStart(group:IGroupResult);
 	groupComplete(group:IGroupResult);
 	testStart(test:IItemResult);
@@ -28,14 +28,16 @@ interface IReporter {
 }
 interface IResult {
 	hasPassed():bool;
-	getStat():IStat;
 	getError():any;
+	getStat():IStat;
 	getGroups():IGroupResult[];
+	getUID():string;
 }
 interface IGroupResult {
 	getLabel():string;
 	getStat():IStat;
 	getItems():IItemResult[];
+	getUID():string;
 }
 interface IItemResult {
 	getLabel():string;
@@ -43,6 +45,7 @@ interface IItemResult {
 	 isStarted():bool;
 	 isFinished():bool;*/
 	getStat():IStat;
+	getUID():string;
 }
 
 interface IStat extends IStatNum {

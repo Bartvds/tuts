@@ -78,12 +78,11 @@ class ItemTest implements IItemResult, IStatNum {
 		return passed;
 	}
 
-	getFailedLabels():string[] {
-		return this._failed.slice(0);
-	}
-
-	getStat():IStat {
+	public getStat():IStat {
 		return new Stat(this.getLabel()).add(this);
+	}
+	public getUID():string {
+		return this._item.uid;
 	}
 
 	public get item():Item {
