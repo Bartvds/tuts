@@ -23,24 +23,24 @@ module tuts {
 			this.logger.log(this.prefix + 'testing started');
 		}
 
-		groupStart(group:IGroup) {
+		groupStart(group:IGroupResult) {
 			this.logger.log(this.prefix + 'started group: ' + group.getLabel(), this.sender ? group : null);
 		}
 
-		groupComplete(group:IGroup) {
+		groupComplete(group:IGroupResult) {
 			this.logger.log(this.prefix + 'completed group: ' + group, this.sender ? group : null);
 		}
 
-		testStart(test:ITest) {
+		testStart(test:IItemResult) {
 			this.logger.log(this.prefix + 'started test: ' + test, this.sender ? test : null);
 		}
 
-		testComplete(test:ITest) {
+		testComplete(test:IItemResult) {
 			this.logger.log(this.prefix + 'completed test: ' + test, this.sender ? test : null);
 		}
 
 		runComplete(result:IResult) {
-			this.logger.log(this.prefix + 'testing completed' + result, this.sender ? result : null);
+			this.logger.log(this.prefix + 'testing completed' + (result  ? ' ' + result.getShort() : ''), this.sender ? result : null);
 		}
 
 		toString():string {

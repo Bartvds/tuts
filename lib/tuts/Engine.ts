@@ -35,24 +35,19 @@ module tuts {
 			return group;
 		}
 
-		getGroups():IGroup[] {
-			return this._groups.slice(0);
-		}
-
 		addReporter(reporter:IReporter) {
 			this._reporter.append(reporter);
 		}
 
-		run(callback?:(error:any, result?:any) => void) {
-
+		run(callback?:(error:any, result?:IResult) => void) {
 			var queue = new GroupQueue(this._reporter);
 			util.eachArray(this._groups, (group:Group) => {
 				queue.append(group);
 			}, this);
 			//beh
-			queue.run((queue:GroupQueue) => {
+			queue.run((result:IResult) => {
 				if (callback) {
-					callback(null);
+					callback(result ? result.getError() : new Error('no result'), result);
 				}
 			});
 		}

@@ -12,25 +12,46 @@ interface ITest {
 	isEqual(a:any, b:any, label:string):bool;
 	isStrictEqual(a:any, b:any, label:string):bool;
 }
-interface ILogger {
-	enabled(value?:bool):bool;
-	log(value:any, sender?:any);
-}
 interface IEngine {
 	getGroup(label:string):IGroup;
-	getGroups():IGroup[];
 }
 interface IReporter {
 	getLabel():string;
 
 	log(value:string, sender?:any);
+
 	runStart();
-	groupStart(group:IGroup);
-	groupComplete(group:IGroup);
-	testStart(test:ITest);
-	testComplete(test:ITest);
+	groupStart(group:IGroupResult);
+	groupComplete(group:IGroupResult);
+	testStart(test:IItemResult);
+	testComplete(test:IItemResult);
 	runComplete(result:IResult);
 }
 interface IResult {
+	getShort():string;
+	getError():any;
+	getGroups():IGroupResult[];
+}
+interface IGroupResult {
+	getLabel():string;
+	getItems():IItemResult[];
+}
+interface IItemResult extends IStat {
+	getLabel():string;
+	isAsync():bool;
+	isStarted():bool;
+	isFinished():bool;
+}
+interface IStat {
+	totalTested():number;
+	numExpected():number;
+	numPassed():number;
+	numFailed():number;
+	hasExpected():bool;
+	hasPassed():bool;
+}
 
+interface ILogger {
+	enabled(value?:bool):bool;
+	log(value:any, sender?:any);
 }

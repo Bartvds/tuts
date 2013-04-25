@@ -14,7 +14,7 @@ class GroupQueue {
 	private _running:bool;
 	private _completed:bool;
 	private _inStep:bool;
-	private _callback:(GroupQueue) => void;
+	private _callback:(err:any, result?:IResult) => void;
 
 	constructor(reporter:IReporter) {
 		this._reporter = reporter;
@@ -40,6 +40,7 @@ class GroupQueue {
 			this._activeGroups.splice(i, 1);
 			this._completedGroups.push(group);
 
+			this._reporter.groupComplete(group);
 			if (!this._inStep) {
 				this.step();
 			}
@@ -49,7 +50,7 @@ class GroupQueue {
 	private step() {
 
 		var group:GroupTest;
-		var self = this;
+		var self:GroupQueue = this;
 		var call = (group:GroupTest) => {
 			self.groupCompleted(group);
 		};
@@ -79,10 +80,12 @@ class GroupQueue {
 		}
 		this._completed = true;
 
-		this._reporter.runComplete(null);
+		var result:IResult;
+
+		this._reporter.runComplete(result);
 
 		if (this._callback) {
-			this._callback(this);
+			this._callback(null, result);
 			this._callback = null;
 		}
 	}

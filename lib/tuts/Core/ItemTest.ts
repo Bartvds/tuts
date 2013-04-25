@@ -3,15 +3,15 @@
 ///<reference path='TestApi.ts'/>
 ///<reference path='../types.ts'/>
 
-class ItemTest {
+class ItemTest implements IItemResult {
 
 	_item:Item;
-	_test:TestApi;
 	_open:Async[] = [];
 	_passed:string[] = [];
 	_failed:string[] = [];
 	_expecting:number = -1;
-	_completed:bool = false;
+	_started:bool = false;
+	_finished:bool = false;
 	_callback:(test:ItemTest) => void;
 	_async:number = 0;
 
@@ -21,17 +21,19 @@ class ItemTest {
 
 	public run(callback:(test:ItemTest) => void):bool {
 		this._callback = callback;
+		this._started = true;
 
-		this._test = new TestApi(this);
-		this._item.execute(this._test);
+		this._item.execute(new TestApi(this));
+
 		if (this._async == 0) {
-			this._completed = true;
+			this._finished = true;
 			return true;
 		}
+		return false;
 	}
 
 	private finishAsync(async:Async) {
-		if (this._completed) {
+		if (this._finished) {
 			throw(new Error('async finish but test already marked completed: ' + async.label));
 		}
 		var i = this._open.indexOf(async);
@@ -42,7 +44,7 @@ class ItemTest {
 		async.clear();
 
 		if (this._open.length == 0) {
-			this._completed = true;
+			this._finished = true;
 			this._callback(this);
 		}
 	}
@@ -75,26 +77,35 @@ class ItemTest {
 		return this._item;
 	}
 
+	public getLabel():string {
+		return this._item.label;
+	}
+
 	public isAsync():bool {
 		return this._async > 0;
+	}
+
+	public isStarted():bool {
+		return this._started;
+	}
+	public isFinished():bool {
+		return this._finished;
 	}
 
 	public totalTested():number {
 		return this._passed.length + this._failed.length;
 	}
 
-	public numExpecting():number {
+	public numExpected():number {
 		return this._expecting;
 	}
+
 	public numPassed():number {
 		return this._passed.length;
 	}
+
 	public numFailed():number {
 		return this._failed.length;
-	}
-
-	public isCompleted():bool {
-		return this._completed;
 	}
 
 	public hasExpected():bool {
@@ -102,6 +113,6 @@ class ItemTest {
 	}
 
 	public hasPassed():bool {
-		return this._completed && (this._failed.length == 0 && this.hasExpected());
+		return this._finished && (this._failed.length == 0 && this.hasExpected());
 	}
 }

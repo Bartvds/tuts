@@ -28,19 +28,19 @@ module tuts {
 
 		}
 
-		groupStart(group:IGroup) {
+		groupStart(group:IGroupResult) {
 
 		}
 
-		groupComplete(group:IGroup) {
+		groupComplete(group:IGroupResult) {
 
 		}
 
-		testStart(test:ITest) {
+		testStart(test:IItemResult) {
 
 		}
 
-		testComplete(test:ITest) {
+		testComplete(test:IItemResult) {
 
 		}
 

@@ -26,25 +26,25 @@ module tuts {
 			}
 		}
 
-		groupStart(group:IGroup) {
+		groupStart(group:IGroupResult) {
 			for (var i = 0, ii = this._reporters.length; i < ii; i++) {
 				this._reporters[i].groupStart(group);
 			}
 		}
 
-		groupComplete(group:IGroup) {
+		groupComplete(group:IGroupResult) {
 			for (var i = 0, ii = this._reporters.length; i < ii; i++) {
 				this._reporters[i].groupComplete(group);
 			}
 		}
 
-		testStart(test:ITest) {
+		testStart(test:IItemResult) {
 			for (var i = 0, ii = this._reporters.length; i < ii; i++) {
 				this._reporters[i].testStart(test);
 			}
 		}
 
-		testComplete(test:ITest) {
+		testComplete(test:IItemResult) {
 			for (var i = 0, ii = this._reporters.length; i < ii; i++) {
 				this._reporters[i].testComplete(test);
 			}

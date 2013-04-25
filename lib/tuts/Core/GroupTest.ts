@@ -3,7 +3,7 @@
 ///<reference path='../../util/collection.ts'/>
 ///<reference path='../types.ts'/>
 
-class GroupTest {
+class GroupTest implements IGroupResult {
 	private _inStep:bool;
 	private _group:Group;
 	private _current:ItemTest;
@@ -65,5 +65,12 @@ class GroupTest {
 			this._callback(this);
 			this._callback = null;
 		}
+	}
+
+	public getLabel():string {
+		return this._group.getLabel();
+	}
+	public getItems():IItemResult[] {
+		return this._items.slice(0);
 	}
 }
