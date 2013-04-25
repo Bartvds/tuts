@@ -73,6 +73,16 @@ module.exports = function (grunt) {
 				src: ['tests/**/*.ts'],
 				dest: 'build/tests/'
 			},
+			node_tests_pass: {
+				options: {
+					expand: true,
+					module: 'commonjs', //or commonjs
+					target: 'es5', //or es3
+					base_path: 'tests/'
+				},
+				src: ['tests/basic.ts','tests/async.ts'],
+				dest: 'build/tests/'
+			},
 			browser_tuts: {
 				options: {
 					module: 'amd', //or commonjs
@@ -151,10 +161,11 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['clean', 'typescript:lib']);
 	grunt.registerTask('test', ['typescript:test']);
 
-	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('node:pass', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests_pass', 'filelist:node_tests', 'tuts:node']);
+	grunt.registerTask('node:all', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
+
 	grunt.registerTask('browser:pass', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests_pass', 'filelist:browser_tests']);
-	grunt.registerTask('browser:typex', ['clean:browser', 'typex', 'typescript:browser_tuts', 'filelist:browser_tests']);
-	grunt.registerTask('node', ['clean:build', 'typex', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
+	grunt.registerTask('browser:all', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
 
 	grunt.registerTask('server', ['browser', 'deserve:browser']);
 
@@ -163,9 +174,9 @@ module.exports = function (grunt) {
 
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
-	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
-	grunt.registerTask('edit_03', ['browser:pass', 'deserve_reload']);
-	grunt.registerTask('edit_04', ['node']);
+	grunt.registerTask('edit_02', ['node:all']);
 	//grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
-	grunt.registerTask('edit_05', ['browser', 'deserve_reload']);
+	grunt.registerTask('edit_03', ['node:pass']);
+	grunt.registerTask('edit_04', ['browser:pass', 'deserve_reload']);
+	grunt.registerTask('edit_05', ['browser:all', 'deserve_reload']);
 };
