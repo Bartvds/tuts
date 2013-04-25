@@ -16,8 +16,6 @@ interface ILogger {
 	enabled(value?:bool):bool;
 	log(value:any, sender?:any);
 }
-interface IResult {
-}
 interface IEngine {
 	getGroup(label:string):IGroup;
 	getGroups():IGroup[];
@@ -26,14 +24,13 @@ interface IReporter {
 	getLabel():string;
 
 	log(value:string, sender?:any);
-	runStart(engine:IEngine);
+	runStart();
 	groupStart(group:IGroup);
 	groupComplete(group:IGroup);
 	testStart(test:ITest);
 	testComplete(test:ITest);
 	runComplete(result:IResult);
 }
-interface IResponder{
-	testUpdate();
-}
+interface IResult {
 
+}

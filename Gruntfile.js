@@ -141,7 +141,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['clean', 'typescript:lib']);
 	grunt.registerTask('test', ['typescript:test']);
 
-	grunt.registerTask('browser', ['clean:browser', 'typex', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
 	grunt.registerTask('browser:typex', ['clean:browser', 'typex', 'typescript:browser_tuts', 'filelist:browser_tests']);
 	grunt.registerTask('node', ['clean:build', 'typex', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
 
@@ -155,5 +155,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
 	grunt.registerTask('edit_03', ['typex']);
 	grunt.registerTask('edit_04', ['node']);
-	grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
+	//grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
+	grunt.registerTask('edit_05', ['browser', 'deserve_reload']);
 };

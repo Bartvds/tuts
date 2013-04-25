@@ -19,8 +19,8 @@ module tuts {
 			this.logger.log(this.prefix + value, this.sender ? sender : null);
 		}
 
-		runStart(engine:IEngine) {
-			this.logger.log(this.prefix + 'testing started', this.sender ? engine : null);
+		runStart() {
+			this.logger.log(this.prefix + 'testing started');
 		}
 
 		groupStart(group:IGroup) {

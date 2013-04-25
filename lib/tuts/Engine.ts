@@ -1,7 +1,7 @@
 ///<reference path='core/Group.ts'/>
-///<reference path='core/GroupResult.ts'/>
 ///<reference path='core/Item.ts'/>
-///<reference path='run/Test.ts'/>
+///<reference path='core/Test.ts'/>
+///<reference path='core/GroupQueue.ts'/>
 ///<reference path='system/System.ts'/>
 ///<reference path='report/MultiReporter.ts'/>
 ///<reference path='../util/collection.ts'/>
@@ -11,16 +11,15 @@ module tuts {
 	export class Engine implements IEngine {
 
 		private _groups:Group[] = [];
-		private _results:GroupResult[] = [];
-		private _running:Group[] = [];
 		private _reporter:MultiReporter = new MultiReporter();
 
 		constructor() {
 
 		}
+
 		addModuleGroup(name:string, mod:any) {
 			if (!mod) {
-				this._reporter.log('no module: ' + name);
+				this._reporter.log('not a module: ' + name);
 			} else if (!mod.test) {
 				this._reporter.log('missing test() on module: ' + name);
 			} else {
@@ -44,31 +43,20 @@ module tuts {
 			this._reporter.append(reporter);
 		}
 
-		run(reporter?:IReporter) {
-			if (reporter) {
-				this._reporter.append(reporter);
-			}
+		run(callback?:(error:any, result?:any) => void) {
 
-			this._reporter.runStart(this);
-
+			var queue = new GroupQueue(this._reporter);
 			util.eachArray(this._groups, (group:Group) => {
-
-				util.eachArray(group.getItems(), (item:Item) => {
-
-					var test = new Test(item);
-					//self._items.push(test);
-
-					test.run((test:Test) => {
-
-					});
-
-
-					//self.check();
-
-				}, this);
-
+				queue.append(group);
 			}, this);
+			//beh
+			queue.run((queue:GroupQueue) => {
+				if (callback) {
+					callback(null);
+				}
+			});
 		}
+
 		get reporter():IReporter {
 			return this._reporter
 		}

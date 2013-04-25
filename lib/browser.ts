@@ -48,6 +48,8 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 		util.eachArray(mods, (mod:any, i:number) => {
 			engine.addModuleGroup(list.list[i], mod);
 		});
-		engine.run();
+		engine.run((error:any, result?:any) => {
+
+		});
 	});
 });

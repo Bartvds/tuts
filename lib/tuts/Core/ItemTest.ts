@@ -1,65 +1,32 @@
 ///<reference path='Async.ts'/>
-///<reference path='../core/Item.ts'/>
+///<reference path='Item.ts'/>
 ///<reference path='../types.ts'/>
 
-class Test implements ITest {
+class ItemTest {
 
 	_item:Item;
+	_test:Test;
 	_open:Async[] = [];
 	_passed:string[] = [];
 	_failed:string[] = [];
 	_expecting:number = -1;
 	_completed:bool = false;
-	_callback:(test:Test) => void;
+	_callback:(test:ItemTest) => void;
 	_async:number = 0;
 
 	constructor(item:Item) {
 		this._item = item;
 	}
 
-	public expect(amount:number) {
-		this._expecting = amount;
-	}
-
-	public run(callback:(test:Test) => void) {
+	public run(callback:(test:ItemTest) => void):bool {
 		this._callback = callback;
-		this._item.execute(this);
 
-		this.check();
-	}
-
-	private check() {
-		if (this._completed) {
-			return;
+		this._test = new Test(this);
+		this._item.execute(this._test);
+		if (this._async == 0) {
+			this._completed = true;
+			return true;
 		}
-		if (this._async > 0 && this._open.length > 0)
-		{
-			return;
-		}
-		this._completed = true;
-		this._callback(this);
-	}
-
-	public isEqual(a:any, b:any, label:string):bool {
-		return this.mark(a == b, label);
-	}
-
-	public isStrictEqual(a:any, b:any, label:string):bool {
-		return this.mark(a === b, label);
-	}
-	public isTrue(a:bool, label:string):bool {
-		return this.mark(a === true, label);
-	}
-
-	//more
-	public async(label:String, seconds?:number):(error?:any) => void {
-		this._async += 1;
-		var async = new Async(this, label, seconds);
-		this._open.push(async);
-		var self:Test = this;
-		return (error?:any) => {
-			self.finishAsync(async)
-		};
 	}
 
 	private finishAsync(async:Async) {
@@ -72,10 +39,24 @@ class Test implements ITest {
 		}
 		this._open.splice(i, 1);
 		async.clear();
-		this.check();
+
+		if (this._open.length == 0) {
+			this._completed = true;
+			this._callback(this);
+		}
 	}
 
-	private mark(passed:bool, label:string) {
+	public addAsync(test:Test, label:String, seconds?:number):(error?:any) => void {
+		this._async += 1;
+		var async = new Async(this, label, seconds);
+		this._open.push(async);
+		var self:ItemTest = this;
+		return (error?:any) => {
+			self.finishAsync(async)
+		};
+	}
+
+	public mark(passed:bool, label:string) {
 		if (passed) {
 			this._passed.push(label)
 		}
@@ -89,8 +70,12 @@ class Test implements ITest {
 		return this._failed.slice(0);
 	}
 
+	public get item():Item {
+		return this._item;
+	}
+
 	public isAsync():bool {
-		return this._open.length > 0;
+		return this._async > 0;
 	}
 
 	public totalTested():number {
@@ -106,7 +91,6 @@ class Test implements ITest {
 	public numFailed():number {
 		return this._failed.length;
 	}
-
 
 	public isCompleted():bool {
 		return this._completed;

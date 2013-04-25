@@ -24,7 +24,7 @@ module tuts {
 			return 'BrowserReporter';
 		}
 
-		runStart(engine:IEngine) {
+		runStart() {
 
 		}
 
