@@ -1,9 +1,13 @@
+declare var process;
+declare var document;
+declare var window;
+
 class Environment {
 	public static isNode():bool {
-		return !(typeof ActiveXObject === "function");
+		return !Environment.isBrowser() && typeof process === "object";
 	}
 
 	public static isBrowser():bool {
-		return !Environment.isNode();
+		return typeof window === "object" && typeof document === "object";
 	}
 }

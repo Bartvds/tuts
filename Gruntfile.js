@@ -10,7 +10,44 @@ module.exports = function (grunt) {
 
 	grunt.loadTasks('tasks');
 
-	grunt.initConfig({
+	var typexQueue = [];
+
+	var typexAdd = function (src, dest, mode, base) {
+		var param = {
+			options: {
+				module: mode, //or commonjs
+				target: 'es5', //or es3
+				base_path: base || '.'
+			},
+			src: [src],
+			dest: dest
+		}
+		typexQueue.push(param);
+	};
+
+	var typexIdCount = 0;
+	var typexIdPre = 'x__auto_';
+	var typexOutput = function (name) {
+		var typescript = {};
+		var ret = {typescript:typescript};
+		var targets = [];
+
+		grunt.util._.each(typexQueue, function (param) {
+			typexIdCount++;
+			var id = typexIdPre + typexIdCount;
+			targets.push('typescript:'+id);
+			typescript[id] = param;
+		});
+
+		grunt.registerTask(name, targets);
+
+		return ret;
+	};
+
+	//typexAdd('tests/basic.ts', 'browser/tests/', 'amd', 'tests/');
+	typexAdd('tests/mini/mini.ts', 'browser/tests/mini.js', 'amd', 'tests/');
+
+	grunt.initConfig(grunt.util._.merge({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			build: ['build/**/*.*', 'build'],
@@ -75,7 +112,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		filelist : {
+		filelist: {
 			tests: {
 				src: ['tests/**/*.ts'],
 				options: {
@@ -98,14 +135,15 @@ module.exports = function (grunt) {
 				}
 			}
 		}
-	});
+	}, typexOutput('typex')));
 
 	grunt.registerTask('default', ['build']);
 	grunt.registerTask('build', ['clean', 'typescript:lib']);
 	grunt.registerTask('test', ['typescript:test']);
 
-	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
-	grunt.registerTask('node', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
+	grunt.registerTask('browser', ['clean:browser', 'typex', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('browser:typex', ['clean:browser', 'typex', 'typescript:browser_tuts', 'filelist:browser_tests']);
+	grunt.registerTask('node', ['clean:build', 'typex', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
 
 	grunt.registerTask('server', ['browser', 'deserve:browser']);
 
@@ -115,6 +153,7 @@ module.exports = function (grunt) {
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
 	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
+	grunt.registerTask('edit_03', ['typex']);
 	grunt.registerTask('edit_04', ['node']);
-	grunt.registerTask('edit_05', ['browser', 'deserve_reload']);
+	grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
 };

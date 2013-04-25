@@ -3,8 +3,9 @@ body {
     background-color:#ddd;
     color:#444;
 }
-
-.logLine {
+.logList {
     font-family:monospace;
     font-size:.9em;
+}
+.logLine {
 }

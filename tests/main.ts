@@ -1,7 +1,7 @@
 
 ///<reference path='../lib/tuts/types.ts'/>
 
-export function init(group:IGroup) => {
+export function test(group:IGroup) => {
 
 	/*
 	 group.setup(() => {

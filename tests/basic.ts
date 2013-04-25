@@ -1,6 +1,6 @@
 ///<reference path='../lib/tuts/types.ts'/>
 
-export function init(group:IGroup) => {
+export function test(group:IGroup) => {
 
 	group.add('boolean', (test:ITest) => {
 		test.expect(1);

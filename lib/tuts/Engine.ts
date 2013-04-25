@@ -20,12 +20,12 @@ module tuts {
 		}
 		addModuleGroup(name:string, mod:any) {
 			if (!mod) {
-				this._reporter.log('not a module: ' + name);
-			} else if (!mod.init) {
-				this._reporter.log('missing init() on module: ' + name);
+				this._reporter.log('no module: ' + name);
+			} else if (!mod.test) {
+				this._reporter.log('missing test() on module: ' + name);
 			} else {
 				var group = this.getGroup(name);
-				mod.init(group);
+				mod.test(group);
 				this._reporter.log('added module: ' + name);
 			}
 		}

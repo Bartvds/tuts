@@ -2,7 +2,7 @@
 ///<reference path='../lib/tuts/types.ts'/>
 
 
-export function init(group:IGroup) => {
+export function test(group:IGroup) => {
 	group.add('async done', (test:ITest) => {
 		test.expect(1);
 		var done = test.async('timed true');
