@@ -82,6 +82,16 @@ module.exports = function (grunt) {
 				src: ['lib/browser.ts'],
 				dest: 'browser/js/tuts.js'
 			},
+			browser_tests_pass: {
+				options: {
+					expand: true,
+					module: 'amd', //or commonjs
+					target: 'es5', //or es3
+					base_path: 'tests/'
+				},
+				src: ['tests/basic.ts','tests/async.ts'],
+				dest: 'browser/tests/'
+			},
 			browser_tests: {
 				options: {
 					expand: true,
@@ -142,6 +152,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['typescript:test']);
 
 	grunt.registerTask('browser', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('browser:pass', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests_pass', 'filelist:browser_tests']);
 	grunt.registerTask('browser:typex', ['clean:browser', 'typex', 'typescript:browser_tuts', 'filelist:browser_tests']);
 	grunt.registerTask('node', ['clean:build', 'typex', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
 
@@ -153,7 +164,7 @@ module.exports = function (grunt) {
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
 	grunt.registerTask('edit_02', ['support', 'filelist:tests']);
-	grunt.registerTask('edit_03', ['typex']);
+	grunt.registerTask('edit_03', ['browser:pass', 'deserve_reload']);
 	grunt.registerTask('edit_04', ['node']);
 	//grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
 	grunt.registerTask('edit_05', ['browser', 'deserve_reload']);

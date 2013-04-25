@@ -1,12 +1,11 @@
 interface IGroup {
 	add(label:string, execute:(test:ITest) => void);
-	getLabel():string;
 }
 interface ITest {
 	expect(amount:number);
 	//async returns a closure
 	async(label:string, seconds?:number):(error?:any) => void;
-	//asserts
+	//asserts (need more)
 	isTrue(a:bool, label:string):bool;
 	isEqual(a:any, b:any, label:string):bool;
 	isStrictEqual(a:any, b:any, label:string):bool;
@@ -26,26 +25,24 @@ interface IReporter {
 	testComplete(test:IItemResult);
 	runComplete(result:IResult);
 }
-interface IResult {
+interface ITestResult {
+	getStat():IStat;
+	getUID():string;
+}
+interface IResult extends ITestResult {
 	hasPassed():bool;
 	getError():any;
-	getStat():IStat;
 	getGroups():IGroupResult[];
-	getUID():string;
 }
-interface IGroupResult {
+interface IGroupResult extends ITestResult {
 	getLabel():string;
-	getStat():IStat;
 	getItems():IItemResult[];
-	getUID():string;
 }
-interface IItemResult {
+interface IItemResult extends ITestResult {
 	getLabel():string;
 	/*isAsync():bool;
 	 isStarted():bool;
 	 isFinished():bool;*/
-	getStat():IStat;
-	getUID():string;
 }
 
 interface IStat extends IStatNum {
