@@ -1,7 +1,7 @@
 ///<reference path='../types.ts'/>
 ///<reference path='../../util/collection.ts'/>
 
-module tuts {
+module report {
 
 	export class MultiReporter implements IReporter {
 

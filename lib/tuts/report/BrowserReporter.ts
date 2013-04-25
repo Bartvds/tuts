@@ -1,7 +1,7 @@
 ///<reference path='../types.ts'/>
 ///<reference path='../../util/collection.ts'/>
 
-module tuts {
+module report {
 
 	export class BrowserReporter implements IReporter {
 		private element:HTMLElement;

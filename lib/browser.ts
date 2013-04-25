@@ -1,9 +1,9 @@
 ///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
-///<reference path='tuts/Engine.ts'/>
-///<reference path='util/collection.ts'/>
 ///<reference path='tuts/system/HTMLLogger.ts'/>
 ///<reference path='tuts/report/BrowserReporter.ts'/>
 ///<reference path='tuts/report/LogReporter.ts'/>
+///<reference path='tuts/core/Engine.ts'/>
+///<reference path='util/collection.ts'/>
 
 'use strict';
 
@@ -33,10 +33,10 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 
 	document.title = Math.round(Math.random() * Math.pow(10, 4)) + ' tuts';
 
-	var engine = new tuts.Engine();
-	engine.addReporter(new tuts.LogReporter(System.console));
-	engine.addReporter(new tuts.LogReporter(new HTMLLogger(document.getElementById('log')), false, ''));
-	engine.addReporter(new tuts.BrowserReporter(document.getElementById('result')));
+	var engine = new Engine();
+	engine.addReporter(new report.LogReporter(System.console));
+	engine.addReporter(new report.LogReporter(new HTMLLogger(document.getElementById('log')), false, ''));
+	engine.addReporter(new report.BrowserReporter(document.getElementById('result')));
 
 	var arr = [];
 

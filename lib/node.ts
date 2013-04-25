@@ -1,4 +1,4 @@
-///<reference path='tuts/Engine.ts'/>
+///<reference path='tuts/core/Engine.ts'/>
 ///<reference path='util/collection.ts'/>
 ///<reference path='tuts/system/System.ts'/>
 ///<reference path='tuts/report/LogReporter.ts'/>
@@ -12,8 +12,8 @@ System.init();
 
 var fs = require('fs');
 
-var engine = new tuts.Engine();
-engine.addReporter(new tuts.LogReporter(System.console, false));
+var engine = new Engine();
+engine.addReporter(new report.LogReporter(System.console, false));
 
 var list;
 

@@ -1,6 +1,6 @@
 ///<reference path='../types.ts'/>
 
-module tuts {
+module report {
 
 	export class LogReporter implements IReporter {
 		sender:bool = true;
