@@ -3,7 +3,7 @@
 
 
 class BrowserReporter implements IReporter {
-	private element:HTMLElement;
+	private _element:HTMLElement;
 
 	constructor(element:HTMLElement) {
 		if (!Environment.isBrowser()) {
@@ -12,7 +12,7 @@ class BrowserReporter implements IReporter {
 		if (!element) {
 			throw(new Error('null element!'));
 		}
-		this.element = element;
+		this._element = element;
 
 		document.title = 'waiting';
 	}

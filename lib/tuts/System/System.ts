@@ -14,6 +14,6 @@ class System {
 	private static __counter:number = Math.round(Math.random() * 1000);
 
 	public static getUID():string {
-		return '_uid|' + (__counter++);
+		return 'uid|' + (__counter++);
 	};
 }

@@ -4,11 +4,11 @@
 class ConsoleLogger implements ILogger {
 
 	private _enabled:bool;
-	private asObject:bool;
+	private _asObject:bool;
 
 	constructor(asObject?:bool, enabled?:bool) {
 		this._enabled = !!enabled;
-		this.asObject = !!asObject;
+		this._asObject = !!asObject;
 	}
 
 	static getLogger():ILogger {
@@ -31,7 +31,7 @@ class ConsoleLogger implements ILogger {
 		if (!this.enabled) {
 			return;
 		}
-		if (this.asObject) {
+		if (this._asObject) {
 			var arr = [value]
 			if (sender) {
 				arr.push(sender);

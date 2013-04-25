@@ -3,12 +3,12 @@
 
 class Stat implements IStat {
 
-	_numTested:number = 0;
-	_numExpected:number = 0;
-	_numPassed:number = 0;
-	_numFailed:number = 0;
-	_numMissing:number = 0;
-	_label:string = '';
+	private _numTested:number = 0;
+	private _numExpected:number = 0;
+	private _numPassed:number = 0;
+	private _numFailed:number = 0;
+	private _numMissing:number = 0;
+	private _label:string = '';
 
 	constructor(label?:string) {
 		this._label = label || '';

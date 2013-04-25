@@ -4,19 +4,19 @@
 class HTMLLogger implements ILogger {
 
 	private _enabled:bool;
-	private element:HTMLElement;
-	private list:HTMLElement;
+	private _element:HTMLElement;
+	private _list:HTMLElement;
 
 	constructor(element:HTMLElement, enabled?:bool) {
 		if (!element) {
 			throw(new Error('null element!'));
 		}
-		this.element = element;
+		this._element = element;
 		this._enabled = !!enabled;
 
-		this.list = document.createElement('ul');
-		this.list.classList.add('logList');
-		this.element.appendChild(this.list);
+		this._list = document.createElement('ul');
+		this._list.classList.add('logList');
+		this._element.appendChild(this._list);
 	}
 
 	public enabled(value?:bool):bool {
@@ -48,6 +48,6 @@ class HTMLLogger implements ILogger {
 				node.appendChild(document.createElement('br'));
 			}
 		});
-		this.list.appendChild(node);
+		this._list.appendChild(node);
 	}
 }

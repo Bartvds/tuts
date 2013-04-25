@@ -1,20 +1,20 @@
 ///<reference path='Async.ts'/>
 ///<reference path='Item.ts'/>
-///<reference path='ItemAssert.ts'/>
+///<reference path='Assert.ts'/>
 ///<reference path='../types.ts'/>
 
 class ItemRun implements IItemResult, IStatNum {
 
-	_item:Item;
-	_open:Async[] = [];
-	_passed:string[] = [];
-	_failed:string[] = [];
-	_expecting:number = 0;
-	_started:bool = false;
-	_finished:bool = false;
-	_callback:(test:ItemRun) => void;
-	_async:number = 0;
-	_inTest:bool = false;
+	private _item:Item;
+	private _open:Async[] = [];
+	private _passed:string[] = [];
+	private _failed:string[] = [];
+	private _expecting:number = 0;
+	private _started:bool = false;
+	private _finished:bool = false;
+	private _callback:(test:ItemRun) => void;
+	private _async:number = 0;
+	private _inTest:bool = false;
 
 	constructor(item:Item) {
 		this._item = item;
@@ -26,7 +26,7 @@ class ItemRun implements IItemResult, IStatNum {
 
 		this._inTest = true;
 		try {
-			this._item.execute(new ItemAssert(this));
+			this._item.execute(new Assert(this));
 		}
 		catch(e){
 
@@ -38,6 +38,9 @@ class ItemRun implements IItemResult, IStatNum {
 			return true;
 		}
 		return false;
+	}
+	public setExpected(amount:number) {
+		this._expecting = amount;
 	}
 
 	private finishAsync(async:Async) {
@@ -58,7 +61,7 @@ class ItemRun implements IItemResult, IStatNum {
 		}
 	}
 
-	public addAsync(api:ItemAssert, label:String, seconds?:number):(error?:any) => void {
+	public addAsync(api:Assert, label:String, seconds?:number):(error?:any) => void {
 		this._async += 1;
 		var async = new Async(this, label, seconds);
 		this._open.push(async);
