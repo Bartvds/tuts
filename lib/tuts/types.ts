@@ -48,6 +48,7 @@ interface IItemResult {
 interface IStat extends IStatNum {
 	getLabel():string;
 	getShort():string;
+	getBlock():string;
 	hasExpected():bool;
 	hasPassed():bool;
 }

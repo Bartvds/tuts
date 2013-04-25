@@ -40,7 +40,9 @@ module tuts {
 		}
 
 		runComplete(result:IResult) {
-			this.logger.log(this.prefix + 'testing completed: ' + result.getStat().getShort(), this.sender ? result : null);
+			var stat = result.getStat();
+			this.logger.log(this.prefix + 'testing completed: ' + stat.getShort(), this.sender ? result : null);
+			this.logger.log(stat.getBlock());
 		}
 
 		toString():string {

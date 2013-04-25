@@ -1,4 +1,5 @@
 ///<reference path='../types.ts'/>
+///<reference path='../../util/collection.ts'/>
 
 class HTMLLogger implements ILogger {
 
@@ -29,13 +30,24 @@ class HTMLLogger implements ILogger {
 		if (!this.enabled) {
 			return;
 		}
+
+		var node = document.createElement('li');
+		node.classList.add('logLine');
+
 		var arr = [value]
 		if (sender) {
 			arr.push(sender);
 		}
-		var node = document.createElement('li');
-		node.classList.add('logLine');
-		node.appendChild(document.createTextNode(arr.join(', ')));
+		value = arr.join(', ');
+
+		value = value.split(/\r?\n/);
+
+		util.eachArray(value, (str:string, i:number, arr:any[]) => {
+			node.appendChild(document.createTextNode(str));
+			if (i < arr.length - 1) {
+				node.appendChild(document.createElement('br'));
+			}
+		});
 		this.list.appendChild(node);
 	}
 }

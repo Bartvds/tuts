@@ -5,6 +5,7 @@ body {
 }
 .logList {
     font-family:monospace;
+    white-space:pre;
     font-size:.9em;
 }
 .logLine {
