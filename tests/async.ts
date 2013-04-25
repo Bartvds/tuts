@@ -3,7 +3,7 @@
 
 
 export function test(group:IGroup) => {
-	group.add('async done', (test:ITest) => {
+	group.add('async basics', (test:ITest) => {
 		test.expect(2);
 
 		var doneA = test.async('timed true A');

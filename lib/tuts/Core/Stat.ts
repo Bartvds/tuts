@@ -45,7 +45,7 @@ class Stat implements IStat {
 	}
 
 	public numMissing():number {
-		return this._numExpected - this._numTested;
+		return this._numExpected > 0 ? this._numExpected - this._numTested : 0;
 	}
 
 	public hasExpected():bool {

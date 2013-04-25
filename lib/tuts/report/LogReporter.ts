@@ -24,7 +24,7 @@ module tuts {
 		}
 
 		groupStart(group:IGroupResult) {
-			this.logger.log(this.prefix + 'started group: ' + group.getLabel(), this.sender ? group : null);
+			this.logger.log(this.prefix + 'started group: "' + group.getLabel() + '"', this.sender ? group : null);
 		}
 
 		groupComplete(group:IGroupResult) {
@@ -32,7 +32,7 @@ module tuts {
 		}
 
 		testStart(test:IItemResult) {
-			this.logger.log(this.prefix + 'started test: ' + test.getLabel(), this.sender ? test : null);
+			this.logger.log(this.prefix + 'started test: "' + test.getLabel() + '"', this.sender ? test : null);
 		}
 
 		testComplete(test:IItemResult) {

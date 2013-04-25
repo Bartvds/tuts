@@ -33,7 +33,13 @@ else {
 
 		engine.reporter.log('loading: ' + path);
 		var prefix = __dirname + '/tests/';
-		var mod = require(prefix + path);
+		var mod;
+		try {
+			mod = require(prefix + path);
+		}
+		catch(e){
+
+		}
 		engine.addModuleGroup(path, mod);
 	});
 	engine.run();

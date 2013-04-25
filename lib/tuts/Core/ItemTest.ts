@@ -9,7 +9,7 @@ class ItemTest implements IItemResult {
 	_open:Async[] = [];
 	_passed:string[] = [];
 	_failed:string[] = [];
-	_expecting:number = -1;
+	_expecting:number = 0;
 	_started:bool = false;
 	_finished:bool = false;
 	_callback:(test:ItemTest) => void;
@@ -25,11 +25,15 @@ class ItemTest implements IItemResult {
 		this._started = true;
 
 		this._inTest = true;
-		this._item.execute(new TestApi(this));
+		try {
+			this._item.execute(new TestApi(this));
+		}
+		catch(e){
+
+		}
 		this._inTest = false;
 
 		if (this._async == 0 || this._open.length == 0) {
-			System.console.log('done sync ' + this.getLabel());
 			this._finished = true;
 			return true;
 		}
@@ -49,7 +53,6 @@ class ItemTest implements IItemResult {
 		async.clear();
 
 		if (!this._inTest && this._open.length === 0) {
-			System.console.log('done Async ' + this.getLabel());
 			this._finished = true;
 			this._callback(this);
 		}
@@ -112,7 +115,7 @@ class ItemTest implements IItemResult {
 	}
 
 	public numExpected():number {
-		return this._expecting > 0 ? this._expecting : 0;
+		return this._expecting;
 	}
 
 	public numPassed():number {
@@ -124,7 +127,7 @@ class ItemTest implements IItemResult {
 	}
 
 	public numMissing():number {
-		return this.numExpected() - this.numTested();
+		return this._expecting > 0 ? this._expecting - this.numTested() : 0;
 	}
 
 	public hasExpected():bool {
