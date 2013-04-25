@@ -1,4 +1,5 @@
 ///<reference path='Group.ts'/>
+///<reference path='Result.ts'/>
 ///<reference path='GroupTest.ts'/>
 ///<reference path='../types.ts'/>
 
@@ -82,7 +83,7 @@ class GroupQueue {
 		}
 		this._completed = true;
 
-		var result:IResult;
+			var result:IResult = new Result(this._completedGroups.slice(0));
 
 		this._reporter.runComplete(result);
 

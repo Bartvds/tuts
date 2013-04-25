@@ -4,11 +4,18 @@
 
 export function test(group:IGroup) => {
 	group.add('async done', (test:ITest) => {
-		test.expect(1);
-		var done = test.async('timed true');
+		test.expect(2);
+
+		var doneA = test.async('timed true A');
 		setTimeout(() => {
 			test.isTrue(true, 'should be true')
-			done();
+			doneA();
 		}, 500);
+
+		var doneB = test.async('timed true B');
+		setTimeout(() => {
+			test.isTrue(!false, 'should be true too')
+			doneB();
+		}, 700);
 	});
 }

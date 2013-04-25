@@ -1,24 +1,28 @@
-
+///<reference path='Stat.ts'/>
 ///<reference path='../types.ts'/>
+///<reference path='../../util/collection.ts'/>
 
 class Result implements IResult {
 
-	public groups:GroupResult[];
+	private _groups:IGroupResult[];
 
-	constructor() {
+	constructor(groups:IGroupResult[]) {
+		this._groups = groups || [];
 	}
 
-	add(group:Group) {
-		var result = new GroupResult(group);
-		this.groups.push(result);
+	public getError():any {
 
 	}
 
-	hasErrors():bool {
-		return false;
+	public getGroups():IGroupResult[] {
+		return this._groups.slice(0);
 	}
 
-	report(reporter:IReporter) {
-
+	public getStat():IStat {
+		var stat:Stat = new Stat();
+		util.eachArray(this._groups, (res:IGroupResult) => {
+			stat.add(res.getStat());
+		});
+		return stat;
 	}
 }

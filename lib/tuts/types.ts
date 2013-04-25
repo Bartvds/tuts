@@ -28,25 +28,31 @@ interface IReporter {
 	runComplete(result:IResult);
 }
 interface IResult {
-	getShort():string;
+	getStat():IStat;
 	getError():any;
 	getGroups():IGroupResult[];
 }
 interface IGroupResult {
 	getLabel():string;
+	getStat():IStat;
 	getItems():IItemResult[];
 }
-interface IItemResult extends IStat {
+interface IItemResult {
 	getLabel():string;
 	isAsync():bool;
 	isStarted():bool;
 	isFinished():bool;
+	getStat():IStat;
 }
 interface IStat {
-	totalTested():number;
+	getLabel():string;
+	getShort():string;
+
+	numTested():number;
 	numExpected():number;
 	numPassed():number;
 	numFailed():number;
+	numMissing():number;
 	hasExpected():bool;
 	hasPassed():bool;
 }

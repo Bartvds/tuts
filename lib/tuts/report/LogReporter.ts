@@ -28,19 +28,19 @@ module tuts {
 		}
 
 		groupComplete(group:IGroupResult) {
-			this.logger.log(this.prefix + 'completed group: ' + group, this.sender ? group : null);
+			this.logger.log(this.prefix + 'completed group: ' + group.getStat().getShort(), this.sender ? group : null);
 		}
 
 		testStart(test:IItemResult) {
-			this.logger.log(this.prefix + 'started test: ' + test, this.sender ? test : null);
+			this.logger.log(this.prefix + 'started test: ' + test.getLabel(), this.sender ? test : null);
 		}
 
 		testComplete(test:IItemResult) {
-			this.logger.log(this.prefix + 'completed test: ' + test, this.sender ? test : null);
+			this.logger.log(this.prefix + 'completed test: ' + test.getStat().getShort(), this.sender ? test : null);
 		}
 
 		runComplete(result:IResult) {
-			this.logger.log(this.prefix + 'testing completed' + (result  ? ' ' + result.getShort() : ''), this.sender ? result : null);
+			this.logger.log(this.prefix + 'testing completed: ' + result.getStat().getShort(), this.sender ? result : null);
 		}
 
 		toString():string {
