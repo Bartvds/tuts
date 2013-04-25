@@ -3,7 +3,7 @@
 ///<reference path='TestApi.ts'/>
 ///<reference path='../types.ts'/>
 
-class ItemTest implements IItemResult, IStatNum {
+class ItemRun implements IItemResult, IStatNum {
 
 	_item:Item;
 	_open:Async[] = [];
@@ -12,7 +12,7 @@ class ItemTest implements IItemResult, IStatNum {
 	_expecting:number = 0;
 	_started:bool = false;
 	_finished:bool = false;
-	_callback:(test:ItemTest) => void;
+	_callback:(test:ItemRun) => void;
 	_async:number = 0;
 	_inTest:bool = false;
 
@@ -20,7 +20,7 @@ class ItemTest implements IItemResult, IStatNum {
 		this._item = item;
 	}
 
-	public run(callback:(test:ItemTest) => void):bool {
+	public run(callback:(test:ItemRun) => void):bool {
 		this._callback = callback;
 		this._started = true;
 
@@ -62,7 +62,7 @@ class ItemTest implements IItemResult, IStatNum {
 		this._async += 1;
 		var async = new Async(this, label, seconds);
 		this._open.push(async);
-		var self:ItemTest = this;
+		var self:ItemRun = this;
 		return (error?:any) => {
 			self.finishAsync(async)
 		};

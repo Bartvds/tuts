@@ -1,7 +1,7 @@
 ///<reference path='core/Group.ts'/>
 ///<reference path='core/Item.ts'/>
 ///<reference path='core/TestApi.ts'/>
-///<reference path='core/GroupQueue.ts'/>
+///<reference path='core/BulkTest.ts'/>
 ///<reference path='system/System.ts'/>
 ///<reference path='report/MultiReporter.ts'/>
 ///<reference path='../util/collection.ts'/>
@@ -40,7 +40,7 @@ module tuts {
 		}
 
 		run(callback?:(error:any, result?:IResult) => void) {
-			var queue = new GroupQueue(this._reporter);
+			var queue = new BulkTest(this._reporter);
 			util.eachArray(this._groups, (group:Group) => {
 				queue.append(group);
 			}, this);

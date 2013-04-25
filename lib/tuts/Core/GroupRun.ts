@@ -1,24 +1,24 @@
 ///<reference path='Group.ts'/>
-///<reference path='ItemTest.ts'/>
+///<reference path='ItemRun.ts'/>
 ///<reference path='Stat.ts'/>
 ///<reference path='../../util/collection.ts'/>
 ///<reference path='../types.ts'/>
 
-class GroupTest implements IGroupResult {
+class GroupRun implements IGroupResult {
 	private _inStep:bool;
 	private _group:Group;
-	private _active:ItemTest;
-	private _queued:ItemTest[] = [];
-	private _completed:ItemTest[] = [];
+	private _active:ItemRun;
+	private _queued:ItemRun[] = [];
+	private _completed:ItemRun[] = [];
 	private _finished:bool;
 	private _reporter:IReporter;
-	private _callback:(group:GroupTest) => void;
+	private _callback:(group:GroupRun) => void;
 
 	constructor(group:Group) {
 		this._group = group;
 	}
 
-	public run(reporter:IReporter, callback:(group:GroupTest) => void) {
+	public run(reporter:IReporter, callback:(group:GroupRun) => void) {
 		if (this._finished) {
 			throw(new Error('check but group test already marked completed:' + this._group.getLabel()));
 		}
@@ -26,12 +26,12 @@ class GroupTest implements IGroupResult {
 		this._reporter = reporter;
 
 		util.eachArray(this._group.getItems(), (item:Item) => {
-			this._queued.push(new ItemTest(item));
+			this._queued.push(new ItemRun(item));
 		});
 		this.step();
 	}
 
-	private itemCompleted(test:ItemTest) {
+	private itemCompleted(test:ItemRun) {
 		if (!test || test !== this._active) {
 			throw(new Error('asnc item completion but not current test'));
 		}
@@ -44,8 +44,8 @@ class GroupTest implements IGroupResult {
 	}
 
 	private step() {
-		var self:GroupTest = this;
-		var call = (test:ItemTest) => {
+		var self:GroupRun = this;
+		var call = (test:ItemRun) => {
 			self.itemCompleted(test);
 		};
 
@@ -91,7 +91,7 @@ class GroupTest implements IGroupResult {
 
 	public getStat():IStat {
 		var stat:Stat = new Stat(this.getLabel())
-		util.eachArray(this._completed, (item:ItemTest) => {
+		util.eachArray(this._completed, (item:ItemRun) => {
 			stat.add(item);
 		});
 		return stat;

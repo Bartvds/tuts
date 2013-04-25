@@ -1,9 +1,9 @@
 
-///<reference path='ItemTest.ts'/>
+///<reference path='ItemRun.ts'/>
 
 
 class Async {
-	constructor(public test:ItemTest, public label:String, public timeout?:number) {
+	constructor(public test:ItemRun, public label:String, public timeout?:number) {
 	}
 
 

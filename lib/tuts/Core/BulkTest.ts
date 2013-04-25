@@ -1,12 +1,12 @@
 ///<reference path='Group.ts'/>
-///<reference path='GroupTest.ts'/>
+///<reference path='GroupRun.ts'/>
 ///<reference path='../types.ts'/>
 
-class GroupQueue implements IResult {
+class BulkTest implements IResult {
 
-	private _queuedGroups:GroupTest[] = [];
-	private _activeGroups:GroupTest[] = [];
-	private _completedGroups:GroupTest[] = [];
+	private _queuedGroups:GroupRun[] = [];
+	private _activeGroups:GroupRun[] = [];
+	private _completedGroups:GroupRun[] = [];
 
 	private _concurrentMax:number = 2;
 	private _reporter:IReporter;
@@ -23,7 +23,7 @@ class GroupQueue implements IResult {
 	}
 
 	public append(group:Group) {
-		this._queuedGroups.push(new GroupTest(group));
+		this._queuedGroups.push(new GroupRun(group));
 	}
 
 	public run(callback:(err:any, result?:IResult) => void) {
@@ -37,7 +37,7 @@ class GroupQueue implements IResult {
 		this.step();
 	}
 
-	private groupCompleted(group:GroupTest) {
+	private groupCompleted(group:GroupRun) {
 		var i = this._activeGroups.indexOf(group);
 		if (i >= 0) {
 			this._activeGroups.splice(i, 1);
@@ -52,9 +52,9 @@ class GroupQueue implements IResult {
 
 	private step() {
 
-		var group:GroupTest;
-		var self:GroupQueue = this;
-		var call = (group:GroupTest) => {
+		var group:GroupRun;
+		var self:BulkTest = this;
+		var call = (group:GroupRun) => {
 			self.groupCompleted(group);
 		};
 		this._inStep = true;

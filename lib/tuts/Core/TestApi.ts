@@ -1,12 +1,12 @@
 ///<reference path='Async.ts'/>
-///<reference path='ItemTest.ts'/>
+///<reference path='ItemRun.ts'/>
 ///<reference path='../types.ts'/>
 
 class TestApi implements ITest {
 
-	private _item:ItemTest;
+	private _item:ItemRun;
 
-	constructor(item:ItemTest) {
+	constructor(item:ItemRun) {
 		this._item = item;
 	}
 

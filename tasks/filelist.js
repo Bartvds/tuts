@@ -30,7 +30,7 @@ module.exports = function (grunt) {
 				if (full.length > baseLen) {
 					if (full.substring(0, baseLen) == base) {
 						list.push(full.substring(baseLen + 1).replace('\\', '/'));
-						grunt.log.writeln('cut "' + p + '" to "' + list[list.length-1] + '" for base "' + base + '"');
+						//grunt.log.writeln('"' + p + '" to "' + list[list.length-1] + '" for base "' + base + '"');
 					}
 				}
 			});
