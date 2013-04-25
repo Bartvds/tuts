@@ -1,11 +1,12 @@
 ///<reference path='Async.ts'/>
 ///<reference path='Item.ts'/>
+///<reference path='TestApi.ts'/>
 ///<reference path='../types.ts'/>
 
 class ItemTest {
 
 	_item:Item;
-	_test:Test;
+	_test:TestApi;
 	_open:Async[] = [];
 	_passed:string[] = [];
 	_failed:string[] = [];
@@ -21,7 +22,7 @@ class ItemTest {
 	public run(callback:(test:ItemTest) => void):bool {
 		this._callback = callback;
 
-		this._test = new Test(this);
+		this._test = new TestApi(this);
 		this._item.execute(this._test);
 		if (this._async == 0) {
 			this._completed = true;
@@ -46,7 +47,7 @@ class ItemTest {
 		}
 	}
 
-	public addAsync(test:Test, label:String, seconds?:number):(error?:any) => void {
+	public addAsync(test:TestApi, label:String, seconds?:number):(error?:any) => void {
 		this._async += 1;
 		var async = new Async(this, label, seconds);
 		this._open.push(async);

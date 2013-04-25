@@ -1,4 +1,5 @@
 ///<reference path='Group.ts'/>
+///<reference path='ItemTest.ts'/>
 ///<reference path='../../util/collection.ts'/>
 ///<reference path='../types.ts'/>
 
@@ -43,7 +44,9 @@ class GroupTest {
 			this._current = this._items.shift();
 
 			if (!this._current.run(call)) {
-				break;
+				this._inStep = false;
+				//bail
+				return;
 			}
 		}
 		this._inStep = false;

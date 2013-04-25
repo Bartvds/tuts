@@ -29,13 +29,13 @@ module.exports = function (grunt) {
 	var typexIdPre = 'x__auto_';
 	var typexOutput = function (name) {
 		var typescript = {};
-		var ret = {typescript:typescript};
+		var ret = {typescript: typescript};
 		var targets = [];
 
 		grunt.util._.each(typexQueue, function (param) {
 			typexIdCount++;
 			var id = typexIdPre + typexIdCount;
-			targets.push('typescript:'+id);
+			targets.push('typescript:' + id);
 			typescript[id] = param;
 		});
 

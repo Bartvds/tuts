@@ -2,7 +2,7 @@
 ///<reference path='ItemTest.ts'/>
 ///<reference path='../types.ts'/>
 
-class Test implements ITest {
+class TestApi implements ITest {
 
 	private _item:ItemTest;
 
