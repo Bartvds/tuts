@@ -1,9 +1,9 @@
-///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
-///<reference path='tuts/system/HTMLLogger.ts'/>
-///<reference path='tuts/report/BrowserReporter.ts'/>
-///<reference path='tuts/report/LogReporter.ts'/>
-///<reference path='tuts/core/Engine.ts'/>
-///<reference path='util/collection.ts'/>
+///<reference path='../../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
+///<reference path='../util/collection.ts'/>
+///<reference path='system/HTMLLogger.ts'/>
+///<reference path='report/BrowserReporter.ts'/>
+///<reference path='report/LogReporter.ts'/>
+///<reference path='core/Engine.ts'/>
 
 'use strict';
 

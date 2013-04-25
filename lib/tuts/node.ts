@@ -1,8 +1,8 @@
-///<reference path='tuts/core/Engine.ts'/>
-///<reference path='util/collection.ts'/>
-///<reference path='tuts/system/System.ts'/>
-///<reference path='tuts/report/LogReporter.ts'/>
-///<reference path='../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
+///<reference path='../../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
+///<reference path='../util/collection.ts'/>
+///<reference path='system/System.ts'/>
+///<reference path='report/LogReporter.ts'/>
+///<reference path='core/Engine.ts'/>
 
 'use strict';
 declare var __dirname;
@@ -38,7 +38,7 @@ else {
 		try {
 			mod = require(prefix + path);
 		}
-		catch(e){
+		catch (e) {
 
 		}
 		engine.addModuleGroup(path, mod);

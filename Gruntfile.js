@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 					target: 'es5', //or es3
 					base_path: 'lib/'
 				},
-				src: ['lib/node.ts'],
+				src: ['lib/tuts/node.ts'],
 				dest: 'build/tuts.js'
 			},
 			node_tests: {
@@ -77,9 +77,9 @@ module.exports = function (grunt) {
 				options: {
 					module: 'amd', //or commonjs
 					target: 'es5', //or es3
-					base_path: 'lib/'
+					base_path: 'lib/tuts/'
 				},
-				src: ['lib/browser.ts'],
+				src: ['lib/tuts/browser.ts'],
 				dest: 'browser/js/tuts.js'
 			},
 			browser_tests_pass: {
