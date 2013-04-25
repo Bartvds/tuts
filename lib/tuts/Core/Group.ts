@@ -6,7 +6,7 @@ class Group implements IGroup {
 
 	public uid:string = System.getUID();
 
-	public _items:Item[] = [];
+	private _items:Item[] = [];
 
 	constructor(public label:string) {
 	}

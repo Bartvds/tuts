@@ -97,15 +97,6 @@ class ItemRun implements IItemResult, IStatNum {
 		return this._async > 0;
 	}
 
-	public isStarted():bool {
-		return this._started;
-	}
-
-	public isFinished():bool {
-		return this._finished;
-	}
-
-
 	public numTested():number {
 		return this._passed.length + this._failed.length;
 	}
