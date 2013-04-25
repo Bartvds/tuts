@@ -1,6 +1,6 @@
 ///<reference path='core/Group.ts'/>
 ///<reference path='core/Item.ts'/>
-///<reference path='core/TestApi.ts'/>
+///<reference path='core/ItemAssert.ts'/>
 ///<reference path='core/BulkTest.ts'/>
 ///<reference path='system/System.ts'/>
 ///<reference path='report/MultiReporter.ts'/>

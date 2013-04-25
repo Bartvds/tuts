@@ -2,7 +2,7 @@
 ///<reference path='ItemRun.ts'/>
 ///<reference path='../types.ts'/>
 
-class TestApi implements ITest {
+class ItemAssert implements ITest {
 
 	private _item:ItemRun;
 

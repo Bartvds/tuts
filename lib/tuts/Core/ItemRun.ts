@@ -1,6 +1,6 @@
 ///<reference path='Async.ts'/>
 ///<reference path='Item.ts'/>
-///<reference path='TestApi.ts'/>
+///<reference path='ItemAssert.ts'/>
 ///<reference path='../types.ts'/>
 
 class ItemRun implements IItemResult, IStatNum {
@@ -26,7 +26,7 @@ class ItemRun implements IItemResult, IStatNum {
 
 		this._inTest = true;
 		try {
-			this._item.execute(new TestApi(this));
+			this._item.execute(new ItemAssert(this));
 		}
 		catch(e){
 
@@ -58,7 +58,7 @@ class ItemRun implements IItemResult, IStatNum {
 		}
 	}
 
-	public addAsync(test:TestApi, label:String, seconds?:number):(error?:any) => void {
+	public addAsync(api:ItemAssert, label:String, seconds?:number):(error?:any) => void {
 		this._async += 1;
 		var async = new Async(this, label, seconds);
 		this._open.push(async);
