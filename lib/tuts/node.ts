@@ -13,7 +13,7 @@ System.init();
 var fs = require('fs');
 
 var engine = new Engine();
-engine.addReporter(new report.LogReporter(System.console, false));
+engine.addReporter(new LogReporter(System.console, false));
 
 var list;
 

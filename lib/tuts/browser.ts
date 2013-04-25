@@ -31,12 +31,12 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 		return;
 	}
 
-	document.title = Math.round(Math.random() * Math.pow(10, 4)) + ' tuts';
+	document.title = 'tuts';
 
 	var engine = new Engine();
-	engine.addReporter(new report.LogReporter(System.console));
-	engine.addReporter(new report.LogReporter(new HTMLLogger(document.getElementById('log')), false, ''));
-	engine.addReporter(new report.BrowserReporter(document.getElementById('result')));
+	engine.addReporter(new LogReporter(System.console));
+	engine.addReporter(new LogReporter(new HTMLLogger(document.getElementById('log')), false, ''));
+	engine.addReporter(new BrowserReporter(document.getElementById('result')));
 
 	var arr = [];
 

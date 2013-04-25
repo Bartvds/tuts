@@ -10,7 +10,7 @@
 class Engine implements IEngine {
 
 	private _groups:Group[] = [];
-	private _reporter:report.MultiReporter = new report.MultiReporter();
+	private _reporter:MultiReporter = new MultiReporter();
 
 	constructor() {
 

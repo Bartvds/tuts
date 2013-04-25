@@ -1,56 +1,55 @@
 ///<reference path='../types.ts'/>
 ///<reference path='../../util/collection.ts'/>
 
-module report {
 
-	export class BrowserReporter implements IReporter {
-		private element:HTMLElement;
+class BrowserReporter implements IReporter {
+	private element:HTMLElement;
 
-		constructor(element:HTMLElement) {
-			if (!Environment.isBrowser()) {
-				throw(new Error('BrowserReporter only works in a browser!'));
-			}
-			if (!element) {
-				throw(new Error('null element!'));
-			}
-			this.element = element;
-
+	constructor(element:HTMLElement) {
+		if (!Environment.isBrowser()) {
+			throw(new Error('BrowserReporter only works in a browser!'));
 		}
-
-		log(value:string, sender?:any) {
-
+		if (!element) {
+			throw(new Error('null element!'));
 		}
+		this.element = element;
 
-		getLabel():string {
-			return 'BrowserReporter';
-		}
+		document.title = 'waiting';
+	}
 
-		runStart(result:IResult) {
+	log(value:string, sender?:any) {
 
-		}
+	}
 
-		groupStart(group:IGroupResult) {
+	getLabel():string {
+		return 'BrowserReporter';
+	}
 
-		}
+	runStart(result:IResult) {
+		document.title = 'running';
+	}
 
-		groupComplete(group:IGroupResult) {
+	groupStart(group:IGroupResult) {
 
-		}
+	}
 
-		testStart(test:IItemResult) {
+	groupComplete(group:IGroupResult) {
 
-		}
+	}
 
-		testComplete(test:IItemResult) {
+	testStart(test:IItemResult) {
 
-		}
+	}
 
-		runComplete(result:IResult) {
+	testComplete(test:IItemResult) {
 
-		}
+	}
 
-		toString():string {
-			return this.getLabel();
-		}
+	runComplete(result:IResult) {
+		document.title = result.hasPassed() ? 'pass' : 'fail';
+	}
+
+	toString():string {
+		return this.getLabel();
 	}
 }
