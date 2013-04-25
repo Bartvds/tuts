@@ -110,7 +110,7 @@ class BulkTest implements IResult {
 
 	public getStat():IStat {
 		var stat:Stat = new Stat();
-		util.eachArray(this.getGroups(), (res:IGroupResult) => {
+		each.inArray(this.getGroups(), (res:IGroupResult) => {
 			stat.add(res.getStat());
 		});
 		return stat;

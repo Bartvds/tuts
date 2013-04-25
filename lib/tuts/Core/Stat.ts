@@ -1,5 +1,5 @@
 ///<reference path='../types.ts'/>
-///<reference path='../../util/collection.ts'/>
+///<reference path='../../util/each.ts'/>
 
 class Stat implements IStat {
 
@@ -44,12 +44,12 @@ class Stat implements IStat {
 		fields.push([<any>'numPassed',this.numPassed()]);
 
 		var max = 0;
-		util.eachArray(fields, (vars:any[]) => {
+		each.inArray(fields, (vars:any[]) => {
 			max = Math.max(max, vars[0].length);
 		});
 
 		var ret:any[] = [];
-		util.eachArray(fields, (vars:any[]) => {
+		each.inArray(fields, (vars:any[]) => {
 			var str:string = vars[0];
 			while (str.length < max) {
 				str += ' ';

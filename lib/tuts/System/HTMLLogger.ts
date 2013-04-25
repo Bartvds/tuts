@@ -1,5 +1,5 @@
 ///<reference path='../types.ts'/>
-///<reference path='../../util/collection.ts'/>
+///<reference path='../../util/each.ts'/>
 
 class HTMLLogger implements ILogger {
 
@@ -38,11 +38,9 @@ class HTMLLogger implements ILogger {
 		if (sender) {
 			arr.push(sender);
 		}
-		value = arr.join(', ');
+		value = arr.join(', ').split(/\r?\n/);
 
-		value = value.split(/\r?\n/);
-
-		util.eachArray(value, (str:string, i:number, arr:any[]) => {
+		each.inArray(value, (str:string, i:number, arr:any[]) => {
 			node.appendChild(document.createTextNode(str));
 			if (i < arr.length - 1) {
 				node.appendChild(document.createElement('br'));

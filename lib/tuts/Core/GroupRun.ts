@@ -1,7 +1,7 @@
 ///<reference path='Group.ts'/>
 ///<reference path='ItemRun.ts'/>
 ///<reference path='Stat.ts'/>
-///<reference path='../../util/collection.ts'/>
+///<reference path='../../util/each.ts'/>
 ///<reference path='../types.ts'/>
 
 class GroupRun implements IGroupResult {
@@ -25,7 +25,7 @@ class GroupRun implements IGroupResult {
 		this._callback = callback;
 		this._reporter = reporter;
 
-		util.eachArray(this._group.getItems(), (item:Item) => {
+		each.inArray(this._group.getItems(), (item:Item) => {
 			this._queued.push(new ItemRun(item));
 		});
 		this.step();
@@ -91,7 +91,7 @@ class GroupRun implements IGroupResult {
 
 	public getStat():IStat {
 		var stat:Stat = new Stat(this.getLabel())
-		util.eachArray(this._completed, (item:ItemRun) => {
+		each.inArray(this._completed, (item:ItemRun) => {
 			stat.add(item);
 		});
 		return stat;

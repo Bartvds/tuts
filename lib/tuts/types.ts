@@ -7,8 +7,13 @@ interface ITest {
 	async(label:string, seconds?:number):(error?:any) => void;
 	//asserts (need more)
 	isTrue(a:bool, label:string):bool;
+	isTrueish(a:bool, label:string):bool;
+	isFalse(a:bool, label:string):bool;
+	isFalsy(a:bool, label:string):bool;
 	isEqual(a:any, b:any, label:string):bool;
-	isStrictEqual(a:any, b:any, label:string):bool;
+	isEqualish(a:any, b:any, label:string):bool;
+	isNotEqual(a:any, b:any, label:string):bool;
+	isNotEqualish(a:any, b:any, label:string):bool;
 }
 interface IEngine {
 	getGroup(label:string):IGroup;

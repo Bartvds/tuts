@@ -1,5 +1,5 @@
 ///<reference path='../types.ts'/>
-///<reference path='../../util/collection.ts'/>
+///<reference path='../../util/each.ts'/>
 
 
 class MultiReporter implements IReporter {

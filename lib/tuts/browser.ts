@@ -1,5 +1,5 @@
 ///<reference path='../../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
-///<reference path='../util/collection.ts'/>
+///<reference path='../util/each.ts'/>
 ///<reference path='system/HTMLLogger.ts'/>
 ///<reference path='report/BrowserReporter.ts'/>
 ///<reference path='report/LogReporter.ts'/>
@@ -40,12 +40,12 @@ require(['text!tests/list.json', 'domReady!'], (list) => {
 
 	var arr = [];
 
-	util.eachArray(list.list, (path:string) => {
+	each.inArray(list.list, (path:string) => {
 		arr.push('tests/' + path);
 		engine.reporter.log('loading: ' + path);
 	});
 	require(arr, (...mods:any[]) => {
-		util.eachArray(mods, (mod:any, i:number) => {
+		each.inArray(mods, (mod:any, i:number) => {
 			engine.addModuleGroup(list.list[i], mod);
 		});
 		engine.run((error:any, result?:IResult) => {

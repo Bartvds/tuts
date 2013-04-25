@@ -5,7 +5,7 @@
 ///<reference path='../system/System.ts'/>
 ///<reference path='../report/MultiReporter.ts'/>
 ///<reference path='../types.ts'/>
-///<reference path='../../util/collection.ts'/>
+///<reference path='../../util/each.ts'/>
 
 class Engine implements IEngine {
 
@@ -40,7 +40,7 @@ class Engine implements IEngine {
 
 	run(callback?:(error:any, result?:IResult) => void) {
 		var queue = new BulkTest(this._reporter);
-		util.eachArray(this._groups, (group:Group) => {
+		each.inArray(this._groups, (group:Group) => {
 			queue.append(group);
 		}, this);
 		//beh

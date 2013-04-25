@@ -1,5 +1,5 @@
 ///<reference path='../../typings/DefinitelyTyped/requirejs/requirejs.d.ts'/>
-///<reference path='../util/collection.ts'/>
+///<reference path='../util/each.ts'/>
 ///<reference path='system/System.ts'/>
 ///<reference path='report/LogReporter.ts'/>
 ///<reference path='core/Engine.ts'/>
@@ -28,7 +28,7 @@ if (!list || !list.list) {
 	System.console.log('no list data in list.json');
 }
 else {
-	util.eachArray(list.list, (path:string) => {
+	each.inArray(list.list, (path:string) => {
 
 		//path = path.replace(/\.[\w-]+$/,'');
 
