@@ -60,7 +60,9 @@ class GroupQueue {
 			group = this._queuedGroups.shift();
 			this._activeGroups.push(group);
 
-			group.run(call);
+			this._reporter.groupStart(group);
+
+			group.run(this._reporter, call);
 		}
 
 		this._inStep = false;
