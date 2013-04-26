@@ -5,9 +5,10 @@
 declare var exports;
 
 
-var exports = exports || {};
-exports.test = (group:IGroup) => {
+//var exports = exports || {};
+//exports.test = (group:IGroup) => {
 
+export function test (group:IGroup) => {
 	group.add('stepper', (test:ITest) => {
 
 		test.expect(2);

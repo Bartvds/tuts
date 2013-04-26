@@ -54,7 +54,7 @@ module.exports = function (grunt) {
 			browser: ['browser/tests/**/*.*', 'browser/tests', 'browser/js/tuts.js']
 		},
 		typescript: {
-			node_tuts: {
+			node: {
 				options: {
 					module: 'commonjs', //or commonjs
 					target: 'es5', //or es3
@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 				src: ['tests/basic.ts','tests/async.ts'],
 				dest: 'build/tests/'
 			},
-			browser_tuts: {
+			browser: {
 				options: {
 					module: 'amd', //or commonjs
 					target: 'es5', //or es3
@@ -100,6 +100,16 @@ module.exports = function (grunt) {
 					base_path: 'tests/'
 				},
 				src: ['tests/basic.ts','tests/async.ts'],
+				dest: 'browser/tests/'
+			},
+			browser_tests_mini: {
+				options: {
+					expand: true,
+					module: 'amd', //or commonjs
+					target: 'es5', //or es3
+					base_path: 'tests/'
+				},
+				src: ['tests/mini/mini.ts'],
 				dest: 'browser/tests/'
 			},
 			browser_tests: {
@@ -133,13 +143,6 @@ module.exports = function (grunt) {
 			}
 		},
 		filelist: {
-			tests: {
-				src: ['tests/**/*.ts'],
-				options: {
-					base: 'tests/',
-					save: 'tests/list.json'
-				}
-			},
 			browser_tests: {
 				src: ['browser/tests/**/*.js'],
 				options: {
@@ -161,11 +164,12 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', ['clean', 'typescript:lib']);
 	grunt.registerTask('test', ['typescript:test']);
 
-	grunt.registerTask('node:pass', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests_pass', 'filelist:node_tests', 'tuts:node']);
-	grunt.registerTask('node:all', ['clean:build', 'typescript:node_tuts', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
+	grunt.registerTask('node:pass', ['clean:build', 'typescript:node', 'typescript:node_tests_pass', 'filelist:node_tests', 'tuts:node']);
+	grunt.registerTask('node:all', ['clean:build', 'typescript:node', 'typescript:node_tests', 'filelist:node_tests', 'tuts:node']);
 
-	grunt.registerTask('browser:pass', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests_pass', 'filelist:browser_tests']);
-	grunt.registerTask('browser:all', ['clean:browser', 'typescript:browser_tuts', 'typescript:browser_tests', 'filelist:browser_tests']);
+	grunt.registerTask('browser:pass', ['clean:browser', 'typescript:browser', 'typescript:browser_tests_pass', 'filelist:browser_tests']);
+	grunt.registerTask('browser:mini', ['clean:browser', 'typescript:browser', 'typescript:browser_tests_mini', 'filelist:browser_tests']);
+	grunt.registerTask('browser:all', ['clean:browser', 'typescript:browser', 'typescript:browser_tests', 'filelist:browser_tests']);
 
 	grunt.registerTask('server', ['browser', 'deserve:browser']);
 
@@ -175,8 +179,8 @@ module.exports = function (grunt) {
 	//link editor UI buttons
 	grunt.registerTask('edit_01', ['clean']);
 	grunt.registerTask('edit_02', ['node:all']);
-	//grunt.registerTask('edit_05', ['browser:typex', 'deserve_reload']);
 	grunt.registerTask('edit_03', ['node:pass']);
 	grunt.registerTask('edit_04', ['browser:pass', 'deserve_reload']);
-	grunt.registerTask('edit_05', ['browser:all', 'deserve_reload']);
+	grunt.registerTask('edit_05', ['browser:mini', 'deserve_reload']);
+	//grunt.registerTask('edit_05', ['browser:all', 'deserve_reload']);
 };

@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 		if (options.base) {
 			var base = path.resolve(options.base.replace(/[\/\\]*$/, '/'));
 			var baseLen = base.length;
+			//reset list so we get only sub paths of base
 			var tmp = list;
 			list = [];
 			grunt.util._.each(tmp, function (p) {
